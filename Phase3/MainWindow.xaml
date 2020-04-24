@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phase3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+                Title="ShootingRanking | Administration Panel | Login" Height="407" Width="400" ResizeMode="CanMinimize">
+    <Canvas>
+        <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\login_gradation.png" Width="400"></Image>
+        <Border BorderThickness="1 1 1 0" Background="#d0d0d0" Width="330" Canvas.Left="30" Canvas.Top="162" Height="229">
+            <Rectangle Fill="#f5f5f5" StrokeThickness="0" Margin="1,1,1,0" />
+        </Border>
+        <StackPanel Width="330" Canvas.Left="30">
+            <Grid Width="330">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Foreground="White" TextWrapping="Wrap" Margin="0 50 0 0">
+                    <TextBlock FontSize="24" FontWeight="Bold">ShootingRanking</TextBlock>
+                    <TextBlock FontSize="18">Administration Panel</TextBlock>
+                </TextBlock>
+                <Image Grid.Column="1" Source="C:\Compilations\C#\Labos\Phase3\Assets\shooter4.png" Height="120" Margin="10 20 0 10" />
+            </Grid>
+            <StackPanel Width="260" Margin="0 35 0 0">
+                <Label x:Name="LEmail" Content="_Email:" Target="{Binding ElementName=TBEmail}" HorizontalAlignment="Stretch" />
+                <TextBox x:Name="TBEmail" Text="" TextWrapping="NoWrap" HorizontalAlignment="Stretch" Padding="0 4 0 4" />
+                <Label x:Name="LPassword" Content="_Password:" Target="{Binding ElementName=PBPassword}" HorizontalAlignment="Stretch" />
+                <PasswordBox x:Name="PBPassword" HorizontalAlignment="Stretch" Padding="0 4 0 4" />
+            </StackPanel>
+            <Canvas Width="260" Margin="0 30 0 0">
+                <Button x:Name="BtnClose" Canvas.Left="0" Width="100" Padding="0 4 0 4" Click="BtnClose_Click">Close</Button>
+                <Button x:Name="BtnLogin" Canvas.Right="0" Width="100" Padding="0 4 0 4" Click="BtnLogin_Click">Login</Button>
+            </Canvas>
+        </StackPanel>
+    </Canvas>
 </Window>

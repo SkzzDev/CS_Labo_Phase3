@@ -1,0 +1,14 @@
+Questions:
+
+	Type type = typeof(User);
+	// Comment créer une liste du type de la variable type ?
+
+	string[] UniquesFields dans les classes héritant de IXMLSerializable, quel meilleur équivalent à une variable membre static dans une interface?
+
+	Héritage d'une const (dans Model et ses sous models) ?
+
+
+
+To do:
+
+	Vérifier les types T dans XMLHelper (vérifier qu'ils soient IXMLSerializable)
