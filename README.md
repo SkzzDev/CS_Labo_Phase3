@@ -2,11 +2,11 @@
 
 ## Description
 
-Cette application aura pour but de gérer les résultats obtenus par des **tireurs** *(via armes à feu, pratiquants le tir sportif)* lors de diverses **compétitions** de tir. Ces résultats seront enregistrés sous forme de 6 **séries** de points, dépendants des impacts sur la cible. Un tireur ne pourra tirer qu'une fois par compétition.
+Cette application aura pour but de gérer les résultats obtenus par des **tireurs.euses** *(via armes à feu, pratiquants le tir sportif)* lors de diverses **compétitions** de tir. Ces résultats seront enregistrés sous forme de 6 **séries** de points, dépendants des impacts sur la cible. Un.e tireur.euse ne pourra tirer qu'une fois par compétition.
 
 ## Classes de données de base
 
-Classe **Shooter**: instancie un.e tireur/tireuse
+Classe **Shooter**: instancie un.e tireur.euse
 ```cs
 public class Shooter : INotFixedInTime, IXMLSavable
 {
@@ -73,7 +73,7 @@ public class User : INotFixedInTime, IXMLSavable
 
 Classe **Country**: instancie un pays
 ```cs
-public class Country : IXMLSavable // United Nation official codification
+public class Country : IXMLSavable // Codification officielle des nations unies
 {
 
     private int _id;

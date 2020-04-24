@@ -21,7 +21,8 @@ namespace Phase3.Elements
 
         #region MemberVars
 
-        private int _id; // United Nation official number
+        // Official United Nations' (UN) codification
+        private int _id;
         private string _name;
         private string _iso2;
         private string _iso3;
