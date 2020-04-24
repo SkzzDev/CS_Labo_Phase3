@@ -8,7 +8,7 @@ Cette application aura pour but de gérer les résultats obtenus par des **tireu
 
 Classe **Shooter**: instancie un.e tireur.euse
 ```cs
-public class Shooter : INotFixedInTime, IXMLSavable
+public class Shooter
 {
 
     private string _id = "";
@@ -24,7 +24,7 @@ public class Shooter : INotFixedInTime, IXMLSavable
 
 Classe **Serie**: instancie une série
 ```cs
-public class Serie : INotFixedInTime, IXMLSavable
+public class Serie
 {
 
     private int _id;
@@ -39,7 +39,7 @@ public class Serie : INotFixedInTime, IXMLSavable
 
 Classe **Competition**: instancie une compétition
 ```cs
-public class Competition : INotFixedInTime, IXMLSavable
+public class Competition
 {
 
     private int _id;
@@ -57,7 +57,7 @@ public class Competition : INotFixedInTime, IXMLSavable
 
 Classe **User**: instancie un utilisateur (pour se connecter à l'administration)
 ```cs
-public class User : INotFixedInTime, IXMLSavable
+public class User
 {
 
     private int _id = -1;
@@ -73,7 +73,7 @@ public class User : INotFixedInTime, IXMLSavable
 
 Classe **Country**: instancie un pays
 ```cs
-public class Country : IXMLSavable // Codification officielle des nations unies
+public class Country // Codification officielle des nations unies
 {
 
     private int _id;
