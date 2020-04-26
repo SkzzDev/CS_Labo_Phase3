@@ -67,10 +67,10 @@ namespace Phase3.Core.Helpers
                         throw;
                     }
                 } else {
-                    foreach (KeyValuePair<string, string> item in objSavable.GetInvalidFields()) {
-                        Console.WriteLine("[{0}] {1}", item.Key, item.Value);
-                    }
-                    throw new XMLException("This object couldn't be serialized because there are errors inside of it.");
+                    string errorFields = "";
+                    foreach (KeyValuePair<string, string> item in objSavable.GetInvalidFields())
+                        errorFields += "[" + item.Key + "] " + item.Value;
+                    throw new XMLException("This object couldn't be serialized because there are errors inside of it. Fields with errors: " + errorFields);
                 }
             } else {
                 throw new XMLException("This object couldn't be verified for serialization.");

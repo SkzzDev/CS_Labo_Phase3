@@ -39,6 +39,11 @@ namespace Phase3.Core.Helpers
             return GetSolutionDirPath() + "\\Data\\Constraints\\constraints.xml";
         }
 
+        public static string GetLogsPath()
+        {
+            return GetSolutionDirPath() + "\\Data\\Logs\\logs.txt";
+        }
+
         public static bool EveryPropertyExistsInClass(Type type, Dictionary<string, object> toSearch)
         {
             bool everyPropertyExistsInClass = true;

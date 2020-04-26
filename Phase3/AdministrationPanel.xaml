@@ -32,18 +32,20 @@
                 <MenuItem Header="_Exit" />
             </MenuItem>
         </Menu>
-        <Border DockPanel.Dock="Top" BorderThickness="0 1 0 1" BorderBrush="#808080" HorizontalAlignment="Stretch">
-            <Grid HorizontalAlignment="Stretch" Background="#ECECEC">
+        <Border DockPanel.Dock="Top" BorderThickness="0 1 0 1" BorderBrush="#103351" HorizontalAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch" Background="#0761B6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Padding="20" Text="Shooting Ranking" TextWrapping="NoWrap" FontSize="22px" FontWeight="Bold" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="0" Padding="20" Text="Shooting Ranking" Foreground="White" TextWrapping="NoWrap" FontSize="22px" FontWeight="Bold" VerticalAlignment="Center" />
                 <Border Grid.Column="1" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
                     <Button x:Name="BtnLogout" Style="{StaticResource BtnLogout}" VerticalAlignment="Center" Padding="6 4" Click="BtnLogout_Click">Déconnexion</Button>
                 </Border>
-                <TextBlock x:Name="TxBName" Margin="0 0 20 0" Grid.Column="2" TextWrapping="NoWrap" FontSize="18px" TextAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" x:Name="TxBName" Margin="0 0 10 0" Foreground="White" TextWrapping="NoWrap" FontSize="18px" TextAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                <Image Grid.Column="3" Margin="0 0 20 0" Name="ImgProfilePicture" Height="50" Width="50" Source="C:\Compilations\C#\Labos\Phase3\Data\ProfilePictures\2.jpg" />
             </Grid>
         </Border>
         <Grid>

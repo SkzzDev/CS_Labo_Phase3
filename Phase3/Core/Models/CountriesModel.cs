@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Phase3.Core.Models
 {
+
     public class CountriesModel
     {
 
     }
+
 }
