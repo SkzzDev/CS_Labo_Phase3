@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phase3.Models
+namespace Phase3.Core.Models
 {
-    public abstract class Model
+    public class CountriesModel
     {
-
-        private static readonly string DEFAULT_DATA_FILE = "";
 
     }
 }

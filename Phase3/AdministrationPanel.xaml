@@ -41,9 +41,9 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Padding="20" Text="Shooting Ranking" TextWrapping="NoWrap" FontSize="22px" FontWeight="Bold" VerticalAlignment="Center" />
                 <Border Grid.Column="1" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
-                    <Button Style="{StaticResource BtnLogout}" VerticalAlignment="Center" Padding="6 4">Déconnexion</Button>
+                    <Button x:Name="BtnLogout" Style="{StaticResource BtnLogout}" VerticalAlignment="Center" Padding="6 4" Click="BtnLogout_Click">Déconnexion</Button>
                 </Border>
-                <TextBlock Margin="0 0 20 0" Grid.Column="2" Text="Florent B." TextWrapping="NoWrap" FontSize="18px" TextAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="TxBName" Margin="0 0 20 0" Grid.Column="2" TextWrapping="NoWrap" FontSize="18px" TextAlignment="Right" VerticalAlignment="Center"></TextBlock>
             </Grid>
         </Border>
         <Grid>

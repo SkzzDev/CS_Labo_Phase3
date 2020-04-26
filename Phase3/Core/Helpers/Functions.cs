@@ -1,4 +1,4 @@
-﻿using Phase3.Elements;
+﻿using Phase3.Core.Elements;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Phase3.Helpers
+namespace Phase3.Core.Helpers
 {
 
     public static class Functions
@@ -20,17 +20,23 @@ namespace Phase3.Helpers
 
         #region Functions
 
-        public static string GetSolutionDir()
+        public static string GetSolutionDirPath()
         {
+            string startUpProject = "Phase3";
             string dir = Directory.GetCurrentDirectory();
-            int pos = dir.LastIndexOf("\\Phase3\\bin");
+            int pos = dir.LastIndexOf("\\" + startUpProject + "\\bin");
             dir = dir.Substring(0, pos);
             return dir;
         }
 
-        public static string GetDataFile(string filename, string ext = "xml")
+        public static string GetDataFilePath(string filename, string ext = "xml")
         {
-            return GetSolutionDir() + "\\Phase3\\Data\\" + filename + "." + ext;
+            return GetSolutionDirPath() + "\\Data\\Data\\" + filename + "." + ext;
+        }
+
+        public static string GetConstaintsFilePath()
+        {
+            return GetSolutionDirPath() + "\\Data\\Constraints\\constraints.xml";
         }
 
         public static bool EveryPropertyExistsInClass(Type type, Dictionary<string, object> toSearch)
@@ -64,4 +70,5 @@ namespace Phase3.Helpers
         #endregion
 
     }
+
 }

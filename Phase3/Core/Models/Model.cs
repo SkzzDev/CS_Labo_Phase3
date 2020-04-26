@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phase3.Models
+namespace Phase3.Core.Models
 {
-    public class CountriesModel
+    public abstract class Model
     {
 
     }

@@ -1,9 +1,12 @@
 ﻿using System.Security.Cryptography;
 
-namespace Phase3.Helpers
+namespace Phase3.Core.Helpers
 {
     public static class PasswordHasher
     {
+
+        #region Functions
+
         // 24 = 192 bits
         private const int SaltByteSize = 24;
         private const int HashByteSize = 24;
@@ -39,6 +42,9 @@ namespace Phase3.Helpers
                 xor |= firstHash[i] ^ secondHash[i];
             return 0 == xor;
         }
+
+        #endregion
+
     }
 
 }

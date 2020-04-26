@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Phase3.Elements.Interfaces
+namespace Phase3.Core.Elements.Interfaces
 {
 
     public interface INotFixedInTime

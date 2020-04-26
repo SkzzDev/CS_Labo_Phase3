@@ -1,6 +1,7 @@
-﻿using Phase3.Elements;
-using Phase3.Helpers;
-using Phase3.Models;
+﻿using Phase3.Core;
+using Phase3.Core.Elements;
+using Phase3.Core.Helpers;
+using Phase3.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,15 +26,19 @@ namespace Phase3
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+
+            // Rewrite the constraints file to be sure that they are up to date
+            Constraints.WakeUp().RewriteConstraints();
+
             TBEmail.Text = "admin@shootingranking.com";
             PBPassword.Password = "Az0";
 
-            UsersModel usersModel = new UsersModel();
+            //UsersModel usersModel = new UsersModel();
             try {
-                User test = new User();
-                Console.WriteLine(test.CreatedAt);
-                User user = new User(1, "Admin", "Root", "admin@shootingranking.com", "Az0");
-                usersModel.AddUser(user);
+                //List<User> users = new List<User>();
+                //users.Add(new User(1, "Florent", "Banneux", "admin@shootingranking.com", "Az0"));
+                //users.Add(new User(2, "Temp", "Temp", "gemp@gmail.com", "Az0"));
+                //usersModel.RemakeUsersFile(users);
             } catch (Exception e) {
                 Console.WriteLine(e.Message);
             }
@@ -60,7 +65,9 @@ namespace Phase3
                 User user = usersModel.GetUser("Email", email);
                 if (user.IsSavable()) {
                     if (user.Password == password) {
-                        Console.WriteLine("Connected!");
+                        AdministrationPanel administrationPanel = new AdministrationPanel(user);
+                        administrationPanel.Show();
+                        Close();
                     } else {
                         MessageBox.Show("The password doesn't match.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }

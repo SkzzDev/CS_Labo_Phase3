@@ -1,4 +1,4 @@
-﻿using Phase3.Elements.Interfaces;
+﻿using Phase3.Core.Elements.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Phase3.Elements
+namespace Phase3.Core.Elements
 {
 
     public class CountryException : Exception
@@ -70,8 +70,6 @@ namespace Phase3.Elements
                     _iso3 = value;
             }
         }
-
-        public string[] UniquesFields { get; } = new string[3] { "Id", "Iso2", "Iso3" };
 
         #endregion
 

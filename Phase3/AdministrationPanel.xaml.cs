@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phase3.Core.Elements;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,9 +18,22 @@ namespace Phase3
     /// </summary>
     public partial class AdministrationPanel : Window
     {
-        public AdministrationPanel()
+
+        private User _userConnected;
+
+        public AdministrationPanel(User userConnected)
         {
             InitializeComponent();
+            _userConnected = userConnected;
+            TxBName.Text = _userConnected.Firstname + " " + _userConnected.Lastname[0] + ".";
+        }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            _userConnected = null;
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
     }
 }

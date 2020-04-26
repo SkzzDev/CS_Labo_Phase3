@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phase3.Core;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,7 @@ namespace Phase3
     /// </summary>
     public partial class App : Application
     {
+
     }
+
 }

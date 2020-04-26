@@ -1,11 +1,11 @@
-﻿using Phase3.Elements.Interfaces;
+﻿using Phase3.Core.Elements.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phase3.Elements
+namespace Phase3.Core.Elements
 {
 
     public class SerieException : Exception
@@ -56,8 +56,6 @@ namespace Phase3.Elements
         public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
 
         public DateTime UpdatedAt { get => _updatedAt; set => _updatedAt = value; }
-
-        public string[] UniquesFields { get; } = new string[1] { "Id" };
 
         #endregion
 

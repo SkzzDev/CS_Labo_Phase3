@@ -1,5 +1,5 @@
-﻿using Phase3.Helpers;
-using Phase3.Elements.Interfaces;
+﻿using Phase3.Core.Helpers;
+using Phase3.Core.Elements.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Phase3.Elements
+namespace Phase3.Core.Elements
 {
 
     public class User : INotFixedInTime, IXMLSavable
@@ -22,8 +22,6 @@ namespace Phase3.Elements
         private string _password = "";
         private DateTime _createdAt;
         private DateTime _updatedAt;
-
-        public string[] UniquesFields { get; } = new string[2] { "Id", "Email" };
 
         #endregion
 
