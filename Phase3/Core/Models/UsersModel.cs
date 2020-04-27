@@ -14,7 +14,7 @@ namespace Phase3.Core.Models
     public class UsersModel : Model
     {
 
-        private static readonly string DEFAULT_DATA_FILE = Functions.GetDataFilePath("users");
+        private static readonly string DATA_FILE = Functions.GetDataFilePath("users");
 
         public bool Exists(string field = "Id", object value = null)
         {
@@ -24,7 +24,7 @@ namespace Phase3.Core.Models
                 Dictionary<string, object> search = new Dictionary<string, object>();
                 search.Add(field, value);
                 try {
-                    return XML.Find<User>(DEFAULT_DATA_FILE, typeof(User), search).Count() >= 1;
+                    return XML.Find<User>(DATA_FILE, typeof(User), search).Count() >= 1;
                 } catch (Exception e) {
                     Logs.Write(e.Message);
                 }
@@ -35,7 +35,7 @@ namespace Phase3.Core.Models
         public void AddUser(User user)
         {
             try {
-                XML.Add<User>(DEFAULT_DATA_FILE, user);
+                XML.Add<User>(DATA_FILE, user);
             } catch (Exception e) {
                 Logs.Write(e.Message);
             }
@@ -44,7 +44,7 @@ namespace Phase3.Core.Models
         public void RemakeUsersFile(List<User> users)
         {
             try {
-                XML.Create<User>(DEFAULT_DATA_FILE, users);
+                XML.Create<User>(DATA_FILE, users);
             } catch (Exception e) {
                 Logs.Write(e.Message);
             }
@@ -53,7 +53,7 @@ namespace Phase3.Core.Models
         public List<User> GetAll()
         {
             try {
-                return XML.GetAll<User>(DEFAULT_DATA_FILE);
+                return XML.GetAll<User>(DATA_FILE);
             } catch (Exception e) {
                 Logs.Write(e.Message);
             }
@@ -70,7 +70,7 @@ namespace Phase3.Core.Models
                     { field, value }
                 };
                 try {
-                    List<User> results = XML.Find<User>(DEFAULT_DATA_FILE, typeof(User), search);
+                    List<User> results = XML.Find<User>(DATA_FILE, typeof(User), search);
                     if (results.Count() == 1) {
                         toReturn = results[0];
                     } else if (results.Count() > 1) {

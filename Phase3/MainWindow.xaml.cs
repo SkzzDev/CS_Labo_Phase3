@@ -39,6 +39,12 @@ namespace Phase3
                 //users.Add(new User(1, "Florent", "Banneux", "admin@shootingranking.com", "Az0"));
                 //users.Add(new User(2, "Temp", "Temp", "gemp@gmail.com", "Az0"));
                 //usersModel.RemakeUsersFile(users);
+
+                Country belgium = new Country(4, "Belgium", "BE", "BEL"); // countriesModel.GetCountry("BEL");
+
+                List<Shooter> shooters = new List<Shooter>();
+                shooters.Add(new Shooter("2004FB01", "Florent", "Banneux", new DateTime(2000, 8, 14), belgium));
+
             } catch (Exception e) {
                 Console.WriteLine(e.Message);
             }
