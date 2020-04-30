@@ -1,6 +1,7 @@
 ﻿using Phase3.Core.Elements;
 using Phase3.Core.Helpers;
 using Phase3.Core.Models;
+using Phase3.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,16 +28,15 @@ namespace Phase3
         {
             InitializeComponent();
             _userConnected = userConnected;
-            TxBName.Text = _userConnected.Firstname + " " + _userConnected.Lastname[0] + ".";
+            Fullname.DataContext = _userConnected;
 
-            UsersModel usersModel = new UsersModel();
-            Console.WriteLine(usersModel.GetUserProfilePicture(_userConnected));
-            ImgProfilePicture.Source = new BitmapImage(new Uri(usersModel.GetUserProfilePicture(_userConnected), UriKind.Absolute));
+            ImgProfilePicture.DataContext = _userConnected;
+
+            DataContext = new IndexViewModel();
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
-            _userConnected = null;
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             Close();

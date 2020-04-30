@@ -1,10 +1,10 @@
 Questions:
 
-	Type type = typeof(User);
-	// Comment créer une liste du type de la variable type?
+	Type type = typeof(User); // Comment créer une variable/liste du type de la variable "type" ?
 
-	string[] UniquesFields dans les classes héritant de IXMLSerializable, quel meilleur équivalent à une variable membre static dans une interface?
+	Clic sur un bouton dans le menu de gauche et le xaml à droite change? UserControl?
 
-	Héritage d'une const (dans Model et ses sous models) ?
+	DataBinding de champs où l'on a des calculs/arrangements à faire? (Exemple: le nom à coté du bouton déconnexion)
 
-	DataBinding de champs où l'on a des calculs à faire? (Exemple: la photo de profil de la personne connectée, il faut calculer le chemin final de l'image pour afficher la nouvelle, dans ce cas-ci, lors que l'utilisateur change d'Id pour que ca marche)
+
+

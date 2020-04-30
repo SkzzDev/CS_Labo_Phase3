@@ -9,5 +9,7 @@ namespace Phase3.Core
     public abstract class Model
     {
 
+        private string DataFile = "";
+
     }
 }

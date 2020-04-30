@@ -4,9 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phase3"
+        xmlns:viewmodels="clr-namespace:Phase3.ViewModels"
+        xmlns:views="clr-namespace:Phase3.Views"
+        xmlns:wpf="clr-namespace:Phase3.WPF"
         mc:Ignorable="d"
-        Title="Administration" Height="532" Width="1012">
+        Title="Administration" Height="532" Width="1012" MinHeight="360" MinWidth="600">
     <Window.Resources>
+        <DataTemplate x:Name="IndexViewTemplate" DataType="{x:Type viewmodels:IndexViewModel}">
+            <views:Index DataContext="{Binding}" />
+        </DataTemplate>
+        <wpf:LastnameConverter x:Key="LastnameConverter" />
+        <wpf:ProfilePictureConverter x:Key="ProfilePictureConverter" />
         <Style TargetType="Button" x:Key="BtnLogout">
             <Setter Property="Background" Value="White" />
             <Setter Property="Foreground" Value="White" />
@@ -44,8 +52,14 @@
                 <Border Grid.Column="1" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
                     <Button x:Name="BtnLogout" Style="{StaticResource BtnLogout}" VerticalAlignment="Center" Padding="6 4" Click="BtnLogout_Click">Déconnexion</Button>
                 </Border>
-                <TextBlock Grid.Column="2" x:Name="TxBName" Margin="0 0 10 0" Foreground="White" TextWrapping="NoWrap" FontSize="18px" TextAlignment="Right" VerticalAlignment="Center"></TextBlock>
-                <Image Grid.Column="3" Margin="0 0 20 0" Name="ImgProfilePicture" Height="50" Width="50" />
+                <StackPanel x:Name="Fullname" Grid.Column="2" Orientation="Horizontal" Margin="0 0 10 0">
+                    <TextBlock Foreground="White" TextWrapping="NoWrap" FontSize="18px" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Firstname}" />
+                        <TextBlock> </TextBlock>
+                        <TextBlock Text="{Binding Lastname, Converter={StaticResource LastnameConverter}}" />
+                    </TextBlock>
+                </StackPanel>
+                <Image Grid.Column="3" Margin="0 0 20 0" Name="ImgProfilePicture" Source="{Binding Id, Converter={StaticResource ProfilePictureConverter}}" Height="50" Width="50" />
             </Grid>
         </Border>
         <Grid>
@@ -57,7 +71,7 @@
                 <ListView Background="#F3F3F3">
                     <ListViewItem IsSelected="True" Margin="0 25 0 0">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="0 0 10 0" />
+                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
                                 <TextBlock VerticalAlignment="Center" FontSize="16">Accueil</TextBlock>
                             </Border>
@@ -65,7 +79,7 @@
                     </ListViewItem>
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="0 0 10 0" />
+                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
                                 <TextBlock VerticalAlignment="Center" FontSize="16">Compétitions</TextBlock>
                             </Border>
@@ -73,7 +87,7 @@
                     </ListViewItem>
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="0 0 10 0" />
+                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
                                 <TextBlock VerticalAlignment="Center" FontSize="16">Résultats</TextBlock>
                             </Border>
@@ -81,7 +95,7 @@
                     </ListViewItem>
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="0 0 10 0" />
+                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
                                 <TextBlock VerticalAlignment="Center" FontSize="16">Utilisateurs</TextBlock>
                             </Border>
@@ -89,9 +103,9 @@
                     </ListViewItem>
                 </ListView>
             </Border>
-            <Grid Grid.Column="1" x:Name="Main">
-                
-            </Grid>
+            <DockPanel Grid.Column="1" x:Name="Main">
+                <ContentControl Content="{Binding}" />
+            </DockPanel>
         </Grid>
     </DockPanel>
 </Window>
