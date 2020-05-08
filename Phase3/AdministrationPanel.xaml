@@ -4,18 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phase3"
-        xmlns:viewmodels="clr-namespace:Phase3.ViewModels"
-        xmlns:views="clr-namespace:Phase3.Views"
         xmlns:wpf="clr-namespace:Phase3.WPF"
         mc:Ignorable="d"
         Title="Administration" Height="532" Width="1012" MinHeight="360" MinWidth="600">
     <Window.Resources>
-        <DataTemplate x:Name="IndexViewTemplate" DataType="{x:Type viewmodels:IndexViewModel}">
-            <views:Index DataContext="{Binding}" />
-        </DataTemplate>
         <wpf:LastnameConverter x:Key="LastnameConverter" />
         <wpf:ProfilePictureConverter x:Key="ProfilePictureConverter" />
-        <Style TargetType="Button" x:Key="BtnLogout">
+        <Style TargetType="Button" x:Key="RedBtn">
             <Setter Property="Background" Value="White" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -50,7 +45,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Padding="20" Text="Shooting Ranking" Foreground="White" TextWrapping="NoWrap" FontSize="22px" FontWeight="Bold" VerticalAlignment="Center" />
                 <Border Grid.Column="1" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
-                    <Button x:Name="BtnLogout" Style="{StaticResource BtnLogout}" VerticalAlignment="Center" Padding="6 4" Click="BtnLogout_Click">Déconnexion</Button>
+                    <Button x:Name="BtnLogout" Style="{StaticResource RedBtn}" VerticalAlignment="Center" Padding="6 4" Click="BtnLogout_Click">Déconnexion</Button>
                 </Border>
                 <StackPanel x:Name="Fullname" Grid.Column="2" Orientation="Horizontal" Margin="0 0 10 0">
                     <TextBlock Foreground="White" TextWrapping="NoWrap" FontSize="18px" VerticalAlignment="Center">
@@ -68,8 +63,8 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="#808080" HorizontalAlignment="Stretch">
-                <ListView Background="#F3F3F3">
-                    <ListViewItem IsSelected="True" Margin="0 25 0 0">
+                <ListView Background="#F3F3F3" Padding="0 25 0 0">
+                    <ListViewItem x:Name="LVIndex" IsSelected="True" MouseLeftButtonUp="LVIndex_MouseLeftButtonUp">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
@@ -77,7 +72,7 @@
                             </Border>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem>
+                    <ListViewItem x:Name="LVCompetitions" MouseLeftButtonUp="LVCompetitions_MouseLeftButtonUp">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
@@ -85,7 +80,7 @@
                             </Border>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem>
+                    <ListViewItem x:Name="LVResutls" MouseLeftButtonUp="LVResutls_MouseLeftButtonUp">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
@@ -93,7 +88,7 @@
                             </Border>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem>
+                    <ListViewItem x:Name="LVUsers" MouseLeftButtonUp="LVUsers_MouseLeftButtonUp">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\home.png" Height="32" Width="32" Margin="5 0 10 0" />
                             <Border BorderBrush="{x:Null}" Height="40">
@@ -103,9 +98,7 @@
                     </ListViewItem>
                 </ListView>
             </Border>
-            <DockPanel Grid.Column="1" x:Name="Main">
-                <ContentControl Content="{Binding}" />
-            </DockPanel>
+            <ContentControl x:Name="Main" Grid.Column="1" />
         </Grid>
     </DockPanel>
 </Window>

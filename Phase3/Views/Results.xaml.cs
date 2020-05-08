@@ -16,27 +16,20 @@ using System.Windows.Shapes;
 namespace Phase3.Views
 {
     /// <summary>
-    /// Interaction logic for Competitions.xaml
+    /// Interaction logic for Results.xaml
     /// </summary>
-    public partial class Competitions : UserControl
+    public partial class Results : UserControl
     {
 
         #region Properties
-
-        private List<Competition> competitions = new List<Competition>();
 
         #endregion
 
         #region Constructors
 
-        public Competitions()
+        public Results()
         {
             InitializeComponent();
-
-            DGCompetitions.ItemsSource = competitions;
-
-            CompetitionsModel competitionsModel = new CompetitionsModel();
-            competitions = competitionsModel.GetAll();
         }
 
         #endregion

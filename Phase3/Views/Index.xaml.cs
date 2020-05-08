@@ -19,12 +19,27 @@ namespace Phase3.Views
     /// </summary>
     public partial class Index : UserControl
     {
+
+        #region Properties
+
+        #endregion
+
+        #region Constructors
+
         public Index()
         {
             InitializeComponent();
 
             RecalculateStats();
         }
+
+        #endregion
+
+        #region Events
+
+        #endregion
+
+        #region Functions
 
         public void RecalculateStats()
         {
@@ -62,6 +77,8 @@ namespace Phase3.Views
 
             Stats.Inlines.Add(".");
         }
+
+        #endregion
 
     }
 

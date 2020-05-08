@@ -13,7 +13,13 @@ namespace Phase3.Core.Models
     public class CompetitionsModel
     {
 
+        #region Properties
+
         private string DataFile = Functions.GetDataFilePath("competitions");
+
+        #endregion
+
+        #region Constructors
 
         public CompetitionsModel()
         {
@@ -26,15 +32,26 @@ namespace Phase3.Core.Models
             }
         }
 
-        public int GetNumberOfCompetitions()
+        #endregion
+
+        #region Functions
+
+        public List<Competition> GetAll()
         {
             try {
-                return XML.GetAll<Competition>(DataFile).Count();
+                return XML.GetAll<Competition>(DataFile);
             } catch (Exception e) {
                 Logs.Write(e.Message);
             }
-            return 0;
+            return new List<Competition>();
         }
+
+        public int GetNumberOfCompetitions()
+        {
+            return GetAll().Count();
+        }
+
+        #endregion
 
     }
 

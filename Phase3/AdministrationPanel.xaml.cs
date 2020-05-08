@@ -1,5 +1,4 @@
 ﻿using Phase3.Core.Elements;
-using Phase3.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,20 +19,28 @@ namespace Phase3
     public partial class AdministrationPanel : Window
     {
 
-        private User _userConnected;
+        #region Properties
 
-        private object _index = new IndexViewModel();
+        private readonly User _userConnected = null;
+
+        #endregion
+
+        #region Constructors
 
         public AdministrationPanel(User userConnected)
         {
             InitializeComponent();
+
             _userConnected = userConnected;
             Fullname.DataContext = _userConnected;
-
             ImgProfilePicture.DataContext = _userConnected;
 
-            DataContext = _index;
+            Main.Content = new Views.Index();
         }
+
+        #endregion
+
+        #region Events
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -41,5 +48,33 @@ namespace Phase3
             mainWindow.Show();
             Close();
         }
+
+        private void LVIndex_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Main.Content = new Views.Index();
+        }
+
+        private void LVCompetitions_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Main.Content = new Views.Competitions();
+        }
+
+        private void LVUsers_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Main.Content = new Views.Users();
+        }
+
+        private void LVResutls_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            // To do
+        }
+
+        #endregion
+
+        #region Functions
+
+        #endregion
+
     }
+
 }

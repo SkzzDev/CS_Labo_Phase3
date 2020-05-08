@@ -16,27 +16,27 @@ using System.Windows.Shapes;
 namespace Phase3.Views
 {
     /// <summary>
-    /// Interaction logic for Competitions.xaml
+    /// Interaction logic for Users.xaml
     /// </summary>
-    public partial class Competitions : UserControl
+    public partial class Users : UserControl
     {
 
         #region Properties
 
-        private List<Competition> competitions = new List<Competition>();
+        private List<User> users = new List<User>();
 
         #endregion
 
         #region Constructors
 
-        public Competitions()
+        public Users()
         {
             InitializeComponent();
 
-            DGCompetitions.ItemsSource = competitions;
+            UsersModel usersModel = new UsersModel();
+            users = usersModel.GetAll();
 
-            CompetitionsModel competitionsModel = new CompetitionsModel();
-            competitions = competitionsModel.GetAll();
+            DGUsers.ItemsSource = users;
         }
 
         #endregion
@@ -49,6 +49,10 @@ namespace Phase3.Views
 
         #endregion
 
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }

@@ -13,4 +13,22 @@
     <Page Remove="Data\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\Users.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Competitions.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Users.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Competitions.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

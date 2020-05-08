@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Phase3.Views.Users"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Phase3.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="Styles/Buttons.xaml" />
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="30">
+            <TextBlock FontWeight="Bold" FontSize="30px" TextWrapping="Wrap">Les utilisateurs</TextBlock>
+            <DataGrid x:Name="DGUsers" Margin="0 30 0 0" Height="150" IsReadOnly="True" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="Auto" MinWidth="40" Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Width="1*" Header="Firstname" Binding="{Binding Firstname}" />
+                    <DataGridTextColumn Width="1*" Header="Lastname" Binding="{Binding Lastname}" />
+                    <DataGridTextColumn Width="2*" Header="Email" Binding="{Binding Email}" />
+                    <DataGridTextColumn Width="Auto" Header="UpdatedAt" Binding="{Binding UpdatedAt}" />
+                    <DataGridTextColumn Width="Auto" Header="CreatedAt" Binding="{Binding CreatedAt}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Margin="0 45 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="1" CornerRadius="15" VerticalAlignment="Center" Margin="5 0 5 0">
+                    <Button x:Name="BtnAdd" Style="{StaticResource GreenBtn}" VerticalAlignment="Center" Height="50" FontSize="18" Click="BtnAdd_Click">Ajouter</Button>
+                </Border>
+                <Border Grid.Column="2" CornerRadius="15" VerticalAlignment="Center" Margin="5 0 5 0">
+                    <Button x:Name="BtnUpdate" Style="{StaticResource OrangeBtn}" VerticalAlignment="Center" Height="50" FontSize="18" Click="BtnAdd_Click">Modifier</Button>
+                </Border>
+                <Border Grid.Column="3" CornerRadius="15" VerticalAlignment="Center" Margin="5 0 5 0">
+                    <Button x:Name="BtnDelete" Style="{StaticResource RedBtn}" VerticalAlignment="Center" Height="50" FontSize="18" Click="BtnAdd_Click">Supprimer</Button>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
