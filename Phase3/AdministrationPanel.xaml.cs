@@ -1,6 +1,4 @@
 ﻿using Phase3.Core.Elements;
-using Phase3.Core.Helpers;
-using Phase3.Core.Models;
 using Phase3.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,6 +22,8 @@ namespace Phase3
 
         private User _userConnected;
 
+        private object _index = new IndexViewModel();
+
         public AdministrationPanel(User userConnected)
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace Phase3
 
             ImgProfilePicture.DataContext = _userConnected;
 
-            DataContext = new IndexViewModel();
+            DataContext = _index;
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)

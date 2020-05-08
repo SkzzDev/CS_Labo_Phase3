@@ -40,10 +40,9 @@ namespace Phase3
                 //users.Add(new User(2, "Temp", "Temp", "gemp@gmail.com", "Az0"));
                 //usersModel.RemakeUsersFile(users);
 
-                Country belgium = new Country(4, "Belgium", "BE", "BEL"); // countriesModel.GetCountry("BEL");
-
-                List<Shooter> shooters = new List<Shooter>();
-                shooters.Add(new Shooter("2004FB01", "Florent", "Banneux", new DateTime(2000, 8, 14), belgium));
+                //List<Shooter> shooters = new List<Shooter>();
+                //Country belgium = new Country(4, "Belgium", "BE", "BEL"); // countriesModel.GetCountry("BEL");
+                //shooters.Add(new Shooter("2004FB01", "Florent", "Banneux", new DateTime(2000, 8, 14), belgium));
 
             } catch (Exception e) {
                 Console.WriteLine(e.Message);

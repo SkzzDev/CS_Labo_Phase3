@@ -9,13 +9,6 @@ using System.Threading.Tasks;
 namespace Phase3.Core.Elements
 {
 
-    public class ShooterException : Exception
-    {
-
-        public ShooterException(string message) : base(message) { }
-
-    }
-
     public class Shooter : INotFixedInTime, IXMLSavable
     {
 
@@ -116,9 +109,6 @@ namespace Phase3.Core.Elements
                 fieldsError.Add("Id", "The shooter's id can't be empty.");
             else if (!r.IsMatch(Id))
                 fieldsError.Add("Id", "The shooter's id must match the pattern.");
-            else if (Firstname.Length > 0 && Lastname.Length > 0) {
-
-            }
             if (Firstname.Length <= 0)
                 fieldsError.Add("Firstname", "The shooter's firstname can't be empty.");
             if (Lastname.Length <= 0)
@@ -129,6 +119,15 @@ namespace Phase3.Core.Elements
                 fieldsError.Add("Birthday", "The shooter's birthday can't be before year 1807 (100 years before the ISSF foundation in 1907).");
             if (UpdatedAt < CreatedAt)
                 fieldsError.Add("UpdatedAt", "The shooter's UpdatedAt property can't be before his CreatedAt property.");
+
+            if (!fieldsError.ContainsKey("Id") && !fieldsError.ContainsKey("Firstname") && !fieldsError.ContainsKey("Lastname")) {
+                string lastnameLetters = Lastname.Substring(0, 4).ToUpper();
+                string firstnameLetters = Firstname.Substring(0, 2).ToUpper();
+                r = new Regex("^(19|20)[0-9]{2}" + lastnameLetters + firstnameLetters + "[0-9]{2}$");
+                if (!r.IsMatch(Id))
+                    fieldsError.Add("Id", "The shooter's id doesn't match with the others shooter's data.");
+            }
+
             return fieldsError;
         }
 

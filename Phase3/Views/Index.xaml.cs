@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phase3.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,45 @@ namespace Phase3.Views
         public Index()
         {
             InitializeComponent();
+
+            RecalculateStats();
+        }
+
+        public void RecalculateStats()
+        {
+            ShootersModel shootersModel = new ShootersModel();
+            int shootersNumber = shootersModel.GetNumberOfShooters();
+
+            CompetitionsModel competitionsModel = new CompetitionsModel();
+            int compsNumber = competitionsModel.GetNumberOfCompetitions();
+
+            Stats.Text = "";
+
+            Stats.Inlines.Add("Actuellement, ");
+
+            if (shootersNumber == 0) {
+                Stats.Inlines.Add("aucun tireur n'est enregistré");
+            } else if(shootersNumber == 1) {
+                Stats.Inlines.Add(new Run("1") { FontWeight = FontWeights.Bold });
+                Stats.Inlines.Add(" tireur est enregistré");
+            } else if (shootersNumber > 1) {
+                Stats.Inlines.Add(new Run(shootersNumber.ToString()) { FontWeight = FontWeights.Bold });
+                Stats.Inlines.Add(" tireurs sont enregistrés");
+            }
+
+            Stats.Inlines.Add(" et ");
+
+            if (shootersNumber == 0) {
+                Stats.Inlines.Add("aucune compétition n'a été ogranisée");
+            } else if (compsNumber == 1) {
+                Stats.Inlines.Add(new Run("1") { FontWeight = FontWeights.Bold });
+                Stats.Inlines.Add(" compétition a été ogranisée");
+            } else if (compsNumber > 1) {
+                Stats.Inlines.Add(new Run(compsNumber.ToString()) { FontWeight = FontWeights.Bold });
+                Stats.Inlines.Add(" compétitions ont été ogranisées");
+            }
+
+            Stats.Inlines.Add(".");
         }
 
     }

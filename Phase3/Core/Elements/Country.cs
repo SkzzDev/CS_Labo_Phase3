@@ -9,13 +9,6 @@ using System.Threading.Tasks;
 namespace Phase3.Core.Elements
 {
 
-    public class CountryException : Exception
-    {
-
-        public CountryException(string message) : base(message) { }
-
-    }
-
     public class Country : IXMLSavable
     {
 
@@ -82,6 +75,8 @@ namespace Phase3.Core.Elements
             Iso2 = iso2;
             Iso3 = iso3;
         }
+
+        public Country() { }
 
         #endregion
 

@@ -16,6 +16,12 @@ namespace Phase3.Core.Models
 
         private string DataFile = Functions.GetDataFilePath("users");
 
+        public UsersModel()
+        {
+            if (!File.Exists(DataFile))
+                XML.Create<User>(DataFile, new List<User>());
+        }
+
         public bool Exists(string field = "Id", object value = null)
         {
             if (typeof(User).GetProperty(field) == null) {

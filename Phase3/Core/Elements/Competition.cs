@@ -8,13 +8,6 @@ using System.Threading.Tasks;
 namespace Phase3.Core.Elements
 {
 
-    public class CompetitionException : Exception
-    {
-
-        public CompetitionException(string message) : base(message) { }
-
-    }
-
     public class Competition : INotFixedInTime, IXMLSavable
     {
 
