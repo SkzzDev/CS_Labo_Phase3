@@ -1,7 +1,7 @@
-﻿using Phase3.Core;
-using Phase3.Core.Elements;
-using Phase3.Core.Helpers;
-using Phase3.Core.Models;
+﻿using Core;
+using Core.Elements;
+using Core.Helpers;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

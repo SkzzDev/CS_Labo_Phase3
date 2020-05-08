@@ -14,6 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Results.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Users.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Views\Results.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Users.xaml">
       <SubType>Designer</SubType>
     </Page>

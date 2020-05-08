@@ -1,10 +1,10 @@
-﻿using Phase3.Core.Helpers;
+﻿using Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Phase3.Core
+namespace Core
 {
     public static class Logs
     {

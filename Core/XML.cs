@@ -1,7 +1,7 @@
-﻿using Phase3.Core;
-using Phase3.Core.Elements;
-using Phase3.Core.Elements.Interfaces;
-using Phase3.Core.Helpers;
+﻿using Core;
+using Core.Elements;
+using Core.Elements.Interfaces;
+using Core.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Phase3.Core
+namespace Core
 {
 
     public class XMLException : Exception

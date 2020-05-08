@@ -1,4 +1,4 @@
-﻿using Phase3.Core.Elements;
+﻿using Core.Elements;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -66,7 +66,7 @@ namespace Phase3
 
         private void LVResutls_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            // To do
+            Main.Content = new Views.Results();
         }
 
         #endregion

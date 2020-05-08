@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Phase3.Core.Elements.Interfaces
+namespace Core.Elements.Interfaces
 {
     public interface IXMLSavable
     {

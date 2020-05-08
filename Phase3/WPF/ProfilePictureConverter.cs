@@ -1,5 +1,5 @@
-﻿using Phase3.Core.Elements;
-using Phase3.Core.Models;
+﻿using Core.Elements;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

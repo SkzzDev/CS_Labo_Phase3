@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Phase3.Core.Helpers
+namespace Core.Helpers
 {
     public static class PasswordHasher
     {

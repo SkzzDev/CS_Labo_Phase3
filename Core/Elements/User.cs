@@ -1,5 +1,5 @@
-﻿using Phase3.Core.Helpers;
-using Phase3.Core.Elements.Interfaces;
+﻿using Core.Helpers;
+using Core.Elements.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Phase3.Core.Elements
+namespace Core.Elements
 {
 
     public class User : INotFixedInTime, IXMLSavable

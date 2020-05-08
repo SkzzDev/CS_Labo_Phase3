@@ -1,6 +1,6 @@
-﻿using Phase3.Core;
-using Phase3.Core.Elements;
-using Phase3.Core.Helpers;
+﻿using Core;
+using Core.Elements;
+using Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phase3.Core.Models
+namespace Core.Models
 {
 
     public class UsersModel : Model

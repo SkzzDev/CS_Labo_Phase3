@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Phase3.Core.Elements.Interfaces
+namespace Core.Elements.Interfaces
 {
 
     public interface INotFixedInTime

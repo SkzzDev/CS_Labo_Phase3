@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phase3.Core
+namespace Core
 {
 
     public abstract class Model

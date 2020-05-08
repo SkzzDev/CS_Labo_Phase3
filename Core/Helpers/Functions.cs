@@ -1,4 +1,4 @@
-﻿using Phase3.Core.Elements;
+﻿using Core.Elements;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Phase3.Core.Helpers
+namespace Core.Helpers
 {
 
     public static class Functions

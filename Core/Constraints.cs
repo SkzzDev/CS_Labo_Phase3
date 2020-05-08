@@ -1,12 +1,12 @@
-﻿using Phase3.Core.Elements;
-using Phase3.Core.Helpers;
+﻿using Core.Elements;
+using Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Phase3.Core
+namespace Core
 {
 
     public class ConstraintsException : Exception

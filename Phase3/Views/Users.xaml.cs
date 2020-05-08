@@ -1,5 +1,5 @@
-﻿using Phase3.Core.Elements;
-using Phase3.Core.Models;
+﻿using Core.Elements;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -43,16 +43,27 @@ namespace Phase3.Views
 
         #region Events
 
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            // To do
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            // To do
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            // To do
+        }
+
         #endregion
 
         #region Functions
 
         #endregion
 
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 
 }
