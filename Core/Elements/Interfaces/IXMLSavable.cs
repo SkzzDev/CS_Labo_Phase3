@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Core.Elements.Interfaces
 {
@@ -7,7 +8,7 @@ namespace Core.Elements.Interfaces
 
         bool IsSavable();
 
-        Dictionary<string, string> GetInvalidFields();
+        SortedDictionary<string, string> GetInvalidFields();
 
     }
 

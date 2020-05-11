@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
-    <Id>1</Id>
     <Email>admin@shootingranking.com</Email>
+    <Id>1</Id>
     <Firstname>Admin</Firstname>
     <Lastname>Root</Lastname>
     <Password>Az0</Password>
@@ -10,12 +10,84 @@
     <UpdatedAt>2020-04-26T03:24:28.1772726+02:00</UpdatedAt>
   </User>
   <User>
+    <Email>florent-banneux2@hotmail.com</Email>
     <Id>2</Id>
-    <Email>florent-banneux@hotmail.com</Email>
-    <Firstname>Florent</Firstname>
+    <Firstname>Laurent</Firstname>
     <Lastname>Banneux</Lastname>
     <Password>Az0</Password>
     <CreatedAt>2020-04-26T03:24:28.1772429+02:00</CreatedAt>
     <UpdatedAt>2020-04-26T03:24:28.1772726+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux4@hotmail.com</Email>
+    <Id>4</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux6@hotmail.com</Email>
+    <Id>6</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux8@hotmail.com</Email>
+    <Id>8</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux9@hotmail.com</Email>
+    <Id>9</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux10@hotmail.com</Email>
+    <Id>10</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux11@hotmail.com</Email>
+    <Id>11</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux12@hotmail.com</Email>
+    <Id>12</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
+  </User>
+  <User>
+    <Email>florent-banneux13@hotmail.com</Email>
+    <Id>13</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Password>Az0</Password>
+    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
+    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
   </User>
 </ArrayOfUser>

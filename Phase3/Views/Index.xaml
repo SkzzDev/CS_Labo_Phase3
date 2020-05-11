@@ -7,12 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ResourceDictionary Source="Styles/Buttons.xaml" />
+        <ResourceDictionary Source="../Styles/Buttons.xaml" />
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="30">
-            <TextBlock FontWeight="Bold" FontSize="30px" TextWrapping="Wrap">Bienvenue sur l'administration !</TextBlock>
-            <TextBlock FontSize="18px" Margin="0 30 0 0" TextWrapping="Wrap">Une toute nouvelle interface pour la gestion des résultats de nos tireurs belges.</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="30px" TextWrapping="Wrap">Welcome into the administration !</TextBlock>
+            <TextBlock FontSize="18px" Margin="0 30 0 0" TextWrapping="Wrap">A brand new interface to manage the results of ours belgians' shooters.</TextBlock>
             <TextBlock x:Name="Stats" FontSize="18px" Margin="0 20 0 0" TextWrapping="Wrap"></TextBlock>
         </StackPanel>
     </ScrollViewer>

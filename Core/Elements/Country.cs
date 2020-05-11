@@ -84,9 +84,9 @@ namespace Core.Elements
 
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
-        public Dictionary<string, string> GetInvalidFields()
+        public SortedDictionary<string, string> GetInvalidFields()
         {
-            Dictionary<string, string> fieldsError = new Dictionary<string, string>();
+            SortedDictionary<string, string> fieldsError = new SortedDictionary<string, string>();
             if (Id <= 0)
                 fieldsError.Add("Id", "The country's id must be strictly positive.");
             if (Name.Length <= 0)
@@ -98,6 +98,23 @@ namespace Core.Elements
             if (!r.IsMatch(Iso3))
                 fieldsError.Add("Iso3", "The country's iso3 must be 3 letters long.");
             return fieldsError;
+        }
+
+        public override bool Equals(object obj)
+        {
+            User userToCompare = obj as User;
+            if (userToCompare == null) {
+                return false;
+            }
+            if (!Id.Equals(userToCompare.Id))
+                return false;
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
 
         #endregion

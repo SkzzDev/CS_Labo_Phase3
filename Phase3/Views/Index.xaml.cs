@@ -51,28 +51,28 @@ namespace Phase3.Views
 
             Stats.Text = "";
 
-            Stats.Inlines.Add("Actuellement, ");
+            Stats.Inlines.Add("Currently, ");
 
             if (shootersNumber == 0) {
-                Stats.Inlines.Add("aucun tireur n'est enregistré");
+                Stats.Inlines.Add("no shooter is registered");
             } else if(shootersNumber == 1) {
                 Stats.Inlines.Add(new Run("1") { FontWeight = FontWeights.Bold });
-                Stats.Inlines.Add(" tireur est enregistré");
+                Stats.Inlines.Add(" shooter is registered");
             } else if (shootersNumber > 1) {
                 Stats.Inlines.Add(new Run(shootersNumber.ToString()) { FontWeight = FontWeights.Bold });
-                Stats.Inlines.Add(" tireurs sont enregistrés");
+                Stats.Inlines.Add(" shooters are registered");
             }
 
             Stats.Inlines.Add(" et ");
 
             if (shootersNumber == 0) {
-                Stats.Inlines.Add("aucune compétition n'a été ogranisée");
+                Stats.Inlines.Add("no competition has been organised");
             } else if (compsNumber == 1) {
                 Stats.Inlines.Add(new Run("1") { FontWeight = FontWeights.Bold });
-                Stats.Inlines.Add(" compétition a été ogranisée");
+                Stats.Inlines.Add(" competition has been organised");
             } else if (compsNumber > 1) {
                 Stats.Inlines.Add(new Run(compsNumber.ToString()) { FontWeight = FontWeights.Bold });
-                Stats.Inlines.Add(" compétitions ont été ogranisées");
+                Stats.Inlines.Add(" competitions have been organised");
             }
 
             Stats.Inlines.Add(".");

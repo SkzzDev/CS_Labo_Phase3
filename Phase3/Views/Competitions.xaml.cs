@@ -23,20 +23,19 @@ namespace Phase3.Views
 
         #region Properties
 
-        private List<Competition> competitions = new List<Competition>();
+        private List<Competition> _competitions = new List<Competition>();
 
         #endregion
 
         #region Constructors
 
-        public Competitions()
+        public Competitions(List<Competition> competitions)
         {
             InitializeComponent();
 
-            DGCompetitions.ItemsSource = competitions;
+            _competitions = competitions;
 
-            CompetitionsModel competitionsModel = new CompetitionsModel();
-            competitions = competitionsModel.GetAll();
+            DGCompetitions.ItemsSource = _competitions;
         }
 
         #endregion

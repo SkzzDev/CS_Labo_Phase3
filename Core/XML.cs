@@ -1,9 +1,8 @@
-﻿using Core;
-using Core.Elements;
+﻿using Core.Elements;
 using Core.Elements.Interfaces;
+using Core.Exceptions.XML;
 using Core.Helpers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -18,19 +17,12 @@ using System.Xml.Serialization;
 namespace Core
 {
 
-    public class XMLException : Exception
-    {
-
-        public XMLException(string message) : base(message) { }
-
-    }
-
     public static class XML
     {
 
         #region Functions
 
-        public static void Create<T>(string filename, List<T> objList) where T : IXMLSavable
+        public static void Create<T>(string filename, List<T> objList, bool checkConstraintsInlist = true) where T : IXMLSavable
         {
             bool areAllSavable = true;
             foreach (IXMLSavable obj in objList) {
@@ -43,7 +35,8 @@ namespace Core
                 throw new XMLException("This list couldn't be serialized because there are objects that contain errors inside of them.");
             } else {
                 try {
-                    VerifyConstraintsInList<T>(filename, objList);
+                    if (checkConstraintsInlist)
+                        VerifyConstraintsInList<T>(filename, objList);
                     List<T> list = objList as List<T>;
                     XmlSerializer xmlFormat = new XmlSerializer(typeof(List<T>));
                     using (Stream fStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None)) {
@@ -55,26 +48,22 @@ namespace Core
             }
         }
 
-        public static void Add<T>(string filename, IXMLSavable obj) where T : IXMLSavable
+        public static void Add<T>(string filename, T obj) where T : IXMLSavable
         {
-            if (obj is IXMLSavable objSavable) {
-                if (obj.IsSavable()) {
-                    try {
-                        XML.VerifyConstraints<T>(filename, obj);
-                        List<T> items = GetAll<T>(filename);
-                        items.Add((T)objSavable);
-                        Create(filename, items);
-                    } catch (Exception) {
-                        throw;
-                    }
-                } else {
-                    string errorFields = "";
-                    foreach (KeyValuePair<string, string> item in objSavable.GetInvalidFields())
-                        errorFields += "[" + item.Key + "] " + item.Value;
-                    throw new XMLException("This object couldn't be serialized because there are errors inside of it. Fields with errors: " + errorFields);
+            if (obj.IsSavable()) {
+                try {
+                    VerifyConstraints<T>(filename, obj);
+                    List<T> items = GetAll<T>(filename);
+                    items.Add((T)obj);
+                    Create<T>(filename, items, false);
+                } catch (Exception) {
+                    throw;
                 }
             } else {
-                throw new XMLException("This object couldn't be verified for serialization.");
+                string errorFields = "";
+                foreach (KeyValuePair<string, string> item in obj.GetInvalidFields())
+                    errorFields += "[" + item.Key + "] " + item.Value;
+                throw new XMLException("This object couldn't be serialized because there are errors inside of it. Fields with errors: " + errorFields);
             }
         }
 
@@ -92,6 +81,24 @@ namespace Core
                 throw;
             }
             return toReturn;
+        }
+
+        public static void Delete<T>(string filename, T obj) where T : IXMLSavable
+        {
+            try {
+                List<T> all = GetAll<T>(filename);
+                List<T> toRemove = new List<T>();
+                foreach (T t in all) {
+                    if (t.Equals(obj)) {
+                        toRemove.Add(t);
+                    }
+                }
+                foreach (T t in toRemove)
+                    all.Remove(t);
+                Create<T>(filename, all);
+            } catch (Exception) {
+                throw;
+            }
         }
 
         public static List<T> Find<T>(string filename, Type type, Dictionary<string, object> toSearch) where T : IXMLSavable
@@ -125,12 +132,12 @@ namespace Core
         {
             foreach (Constraint constraint in Constraints.WakeUp().GetDataFileConstraints(filename)) {
                 if (constraint.Type == ConstraintsTypes.UNIQUE) {
-                    object elemToVerifyValue = elemToVerify.GetType().GetProperty(constraint.Field).GetValue(elemToVerify);
+                    object elemToVerifyValue = typeof(T).GetProperty(constraint.Field).GetValue(elemToVerify);
                     Dictionary<string, object> search = new Dictionary<string, object>();
                     search.Add(constraint.Field, elemToVerifyValue);
                     List<T> results = Find<T>(filename, typeof(T), search);
                     if (results.Count() >= 1)
-                        throw new XMLException("A row already exists with the field « " + constraint.Field + " » containing the value « " + elemToVerifyValue.ToString() + " ». In file « " + constraint.DataFile + ".xml ».");
+                        throw new ValueInUniqueFieldAlreadyTaken("A row already exists with the field « " + constraint.Field + " » containing the value « " + elemToVerifyValue.ToString() + " ». Insertion in file « " + constraint.DataFile + ".xml » have been cancelled.");
                 }
             }
         }
@@ -141,14 +148,14 @@ namespace Core
             List<Constraint> constraintsToCheck = Constraints.WakeUp().GetDataFileConstraints(filename);
             if (constraintsToCheck.Count() > 0 && listToVerify.Count() > 1) {
                 List<T> listToCheck = new List<T>(); // List where current T element will need to check if it is ok or not
+                Type t = typeof(T);
                 foreach (T elemToVerify in listToVerify) {
                     foreach (T elemToCheck in listToCheck) {
                         foreach (Constraint constraint in constraintsToCheck) {
                             if (constraint.Type == ConstraintsTypes.UNIQUE) {
-                                object elemToVerifyValue = elemToVerify.GetType().GetProperty(constraint.Field).GetValue(elemToVerify);
-                                object elemToCheckValue = elemToCheck.GetType().GetProperty(constraint.Field).GetValue(elemToCheck);
-                                if (elemToVerifyValue.Equals(elemToCheckValue))
-                                    throw new XMLException("A row already exists containing the value « " + elemToVerifyValue.ToString() + " » in the field « " + constraint.Field + " ». Insertions in the file « " + constraint.DataFile + ".xml » have been cancelled.");
+                                PropertyInfo property = t.GetProperty(constraint.Field);
+                                if (property.GetValue(elemToVerify).Equals(property.GetValue(elemToCheck)))
+                                    throw new ValueInUniqueFieldAlreadyTaken("A row already exists containing the value « " + property.GetValue(elemToVerify).ToString() + " » in the field « " + constraint.Field + " ». Insertions in the file « " + constraint.DataFile + ".xml » have been cancelled.");
                             }
                         }
                     }

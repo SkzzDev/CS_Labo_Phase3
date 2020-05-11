@@ -7,42 +7,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ResourceDictionary Source="Styles/Buttons.xaml" />
+        <ResourceDictionary Source="../Styles/Buttons.xaml" />
     </UserControl.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="30">
-            <TextBlock FontWeight="Bold" FontSize="30px" TextWrapping="Wrap">Les utilisateurs</TextBlock>
-            <DataGrid x:Name="DGUsers" Margin="0 30 0 0" Height="150" IsReadOnly="True" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel x:Name="MainStackPanel" Margin="30">
+            <TextBlock FontWeight="Bold" FontSize="30px" TextWrapping="Wrap">The users</TextBlock>
+            <Canvas>
+                <Border Canvas.Right="0" Canvas.Bottom="-15px" Grid.Column="1" CornerRadius="15" VerticalAlignment="Center">
+                    <Button x:Name="BtnReload" Style="{StaticResource BlueBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnReload_Click">Reload</Button>
+                </Border>
+            </Canvas>
+            <DataGrid x:Name="DGUsers" Margin="0 30 0 0" Height="150" IsReadOnly="True" Width="{Binding ElementName=MainStackPanel, Path=ActualWidth}" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="Auto" MinWidth="40" Header="Id" Binding="{Binding Id}" />
                     <DataGridTextColumn Width="1*" Header="Firstname" Binding="{Binding Firstname}" />
                     <DataGridTextColumn Width="1*" Header="Lastname" Binding="{Binding Lastname}" />
                     <DataGridTextColumn Width="2*" Header="Email" Binding="{Binding Email}" />
-                    <DataGridTemplateColumn Width="Auto" Header="UpdatedAt">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker SelectedDate="{Binding UpdatedAt}" BorderThickness="0" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="Auto" Header="CreatedAt">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker SelectedDate="{Binding CreatedAt}" BorderThickness="0" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Width="Auto" Header="UpdatedAt" Binding="{Binding UpdatedAt}" />
+                    <DataGridTextColumn Width="Auto" Header="CreatedAt" Binding="{Binding CreatedAt}" />
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0 15 0 0">
                 <Border Grid.Column="1" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
-                    <Button x:Name="BtnAdd" Style="{StaticResource GreenBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnAdd_Click">Ajouter</Button>
+                    <Button x:Name="BtnAdd" Style="{StaticResource GreenBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnAdd_Click">Add</Button>
                 </Border>
                 <Border Grid.Column="2" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
-                    <Button x:Name="BtnUpdate" Style="{StaticResource OrangeBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnUpdate_Click">Modifier</Button>
+                    <Button x:Name="BtnUpdate" Style="{StaticResource OrangeBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnUpdate_Click">Update</Button>
                 </Border>
                 <Border Grid.Column="3" CornerRadius="15" VerticalAlignment="Center">
-                    <Button x:Name="BtnDelete" Style="{StaticResource RedBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnDelete_Click">Supprimer</Button>
+                    <Button x:Name="BtnDelete" Style="{StaticResource RedBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnDelete_Click">Delete</Button>
                 </Border>
             </StackPanel>
         </StackPanel>

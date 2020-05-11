@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Collections.Specialized;
 
 namespace Core.Elements
 {
@@ -58,7 +59,7 @@ namespace Core.Elements
         {
             get { return _email; }
             set {
-                if (Functions.IsEmailValid(value))
+                if (value.Length > 0)
                     _email = value;
             }
         }
@@ -102,6 +103,8 @@ namespace Core.Elements
             UpdatedAt = DateTime.Now;
         }
 
+        public User(User user) : this(user.Id, user.Firstname, user.Lastname, user.Email, user.Password, user.CreatedAt, user.UpdatedAt) { }
+
         public User() { }
 
         #endregion
@@ -110,9 +113,9 @@ namespace Core.Elements
 
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
-        public Dictionary<string, string> GetInvalidFields()
+        public SortedDictionary<string, string> GetInvalidFields()
         {
-            Dictionary<string, string> fieldsError = new Dictionary<string, string>();
+            SortedDictionary<string, string> fieldsError = new SortedDictionary<string, string>();
             if (Id <= 0)
                 fieldsError.Add("Id", "The user's id must be strictly positive.");
             if (Firstname.Length <= 0)
@@ -128,6 +131,25 @@ namespace Core.Elements
             if (UpdatedAt < CreatedAt)
                 fieldsError.Add("UpdatedAt", "The user's UpdatedAt property can't be before his CreatedAt property.");
             return fieldsError;
+        }
+
+        public override bool Equals(object obj)
+        {
+            User userToCompare = obj as User;
+            if (userToCompare == null) {
+                return false;
+            }
+            if (!Id.Equals(userToCompare.Id))
+                return false;
+            if (!Email.Equals(userToCompare.Email))
+                return false;
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
 
         #endregion

@@ -63,9 +63,9 @@ namespace Core.Elements
 
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
-        public Dictionary<string, string> GetInvalidFields()
+        public SortedDictionary<string, string> GetInvalidFields()
         {
-            Dictionary<string, string> fieldsError = new Dictionary<string, string>();
+            SortedDictionary<string, string> fieldsError = new SortedDictionary<string, string>();
             if (DataFile.Length <= 0)
                 fieldsError.Add("DataFile", "The constraint's data file can't be empty.");
             if (Field.Length <= 0)

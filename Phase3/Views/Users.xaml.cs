@@ -23,39 +23,60 @@ namespace Phase3.Views
 
         #region Properties
 
-        private List<User> users = new List<User>();
+        private List<User> _users = new List<User>();
 
         #endregion
 
         #region Constructors
 
-        public Users()
+        public Users(List<User> users)
         {
             InitializeComponent();
 
-            UsersModel usersModel = new UsersModel();
-            users = usersModel.GetAll();
+            _users = users;
 
-            DGUsers.ItemsSource = users;
+            DGUsers.ItemsSource = _users;
         }
 
         #endregion
 
         #region Events
 
+        private void BtnReload_Click(object sender, RoutedEventArgs e)
+        {
+            UsersModel usersModel = new UsersModel();
+            _users.Clear();
+            _users.AddRange(usersModel.GetAll()); // Throw exception if there is more users than before the reload
+        }
+
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            // To do
+            AddNewUser addNewUser = new AddNewUser(_users);
+            addNewUser.ShowDialog();
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            // To do
+            User user = (User)DGUsers.SelectedItem;
+            if (user != null) {
+                // To do
+                // Open new window
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            // To do
+            User user = (User)DGUsers.SelectedItem;
+            if (user != null) {
+                _users.Remove(user);
+                UsersModel usersModel = new UsersModel();
+                try {
+                    usersModel.DeleteUser(user);
+                    MessageBox.Show("The user has been deleted.", "User deleted !", MessageBoxButton.OK, MessageBoxImage.Information);
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
         }
 
         #endregion

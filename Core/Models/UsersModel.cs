@@ -31,8 +31,8 @@ namespace Core.Models
                 search.Add(field, value);
                 try {
                     return XML.Find<User>(DataFile, typeof(User), search).Count() >= 1;
-                } catch (Exception e) {
-                    Logs.Write(e.Message);
+                } catch (Exception) {
+                    throw;
                 }
             }
             return false;
@@ -42,8 +42,8 @@ namespace Core.Models
         {
             try {
                 XML.Add<User>(DataFile, user);
-            } catch (Exception e) {
-                Logs.Write(e.Message);
+            } catch (Exception) {
+                throw;
             }
         }
 
@@ -51,8 +51,8 @@ namespace Core.Models
         {
             try {
                 XML.Create<User>(DataFile, users);
-            } catch (Exception e) {
-                Logs.Write(e.Message);
+            } catch (Exception) {
+                throw;
             }
         }
 
@@ -60,10 +60,9 @@ namespace Core.Models
         {
             try {
                 return XML.GetAll<User>(DataFile);
-            } catch (Exception e) {
-                Logs.Write(e.Message);
+            } catch (Exception) {
+                throw;
             }
-            return new List<User>();
         }
 
         public User GetUser(string field = "Id", object value = null)
@@ -84,16 +83,56 @@ namespace Core.Models
                         List<Constraint> usersUniqueConstraints = Constraints.WakeUp().GetConstraintsOfType(ConstraintsTypes.UNIQUE, usersConstraints);
                         foreach (Constraint constraint in usersUniqueConstraints) {
                             if (constraint.Field.Equals(field)) {
-                                Logs.Write("The file « users » is corrupted. Two rows have the same value on the unique field « " + field + " ».");
+                                Logs.Write("The file « users.xml » is corrupted. Two rows have the same value on the unique field « " + field + " ».");
                                 break;
                             }
                         }
                     }
-                } catch (Exception e) {
-                    Logs.Write(e.Message);
+                } catch (Exception) {
+                    throw;
                 }
             }
             return toReturn;
+        }
+
+        public int GetNextId(List<User> users)
+        {
+            // Pretty bad approach but there isn't many users and users will usually be near perfectly ordered if not so...
+            if (users != null && users.Count() > 0) {
+                // Sort users
+                int iMax = 0;
+                for (int len = users.Count(); len > 1; len--) {
+                    for (int i = 1; i < len; i++) {
+                        if (users[i].Id > users[iMax].Id) iMax = i;
+                    }
+                    User temp = new User(users[len - 1]);
+                    users[len - 1] = users[iMax];
+                    users[iMax] = temp;
+                }
+
+                // Find the first hole
+                int currentHole = 1;
+                foreach (User user in users) {
+                    if (user.Id > currentHole) {
+                        return currentHole;
+                    } else {
+                        currentHole++;
+                    }
+                }
+
+                // If no hole found until the end (users were perfectly ordered)
+                return currentHole;
+            }
+            return 1;
+        }
+
+        public void DeleteUser(User user)
+        {
+            try {
+                XML.Delete<User>(DataFile, user);
+            } catch (Exception) {
+                throw;
+            }
         }
 
         public string GetUserProfilePicture(User user)

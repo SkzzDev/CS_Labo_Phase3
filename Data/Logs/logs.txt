@@ -1,8 +1,0 @@
-[26/4/2020 @ 3:59:15] The file « users » is corrupted. Two rows have the same value on the unique field « Email ».
-[26/4/2020 @ 3:59:19] The file « users » is corrupted. Two rows have the same value on the unique field « Email ».
-[30/4/2020 @ 15:56:41] There was an error reflecting type 'System.Collections.Generic.List`1[Phase3.Core.Elements.Shooter]'.
-[30/4/2020 @ 15:56:44] Could not find file 'C:\Compilations\C#\Labos\Phase3\Data\Data\shooters.xml'.
-[30/4/2020 @ 16:17:48] There was an error reflecting type 'System.Collections.Generic.List`1[Phase3.Core.Elements.Shooter]'.
-[30/4/2020 @ 16:17:50] Could not find file 'C:\Compilations\C#\Labos\Phase3\Data\Data\shooters.xml'.
-[30/4/2020 @ 16:25:4] There is an error in XML document (2, 2).
-[30/4/2020 @ 16:26:26] There is an error in XML document (2, 2).

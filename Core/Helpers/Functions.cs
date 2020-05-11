@@ -72,6 +72,32 @@ namespace Core.Helpers
             return r.IsMatch(password);
         }
 
+        // Not tested yet
+        public static List<T> ExtractionSort<T>(List<T> tElements, string onProperty = "Id")
+        {
+            if (HasProperty(typeof(T), onProperty)) {
+                PropertyInfo property = typeof(T).GetProperty(onProperty);
+                if (property.PropertyType is IComparable) {
+                    int iMax = 0;
+                    for (int len = tElements.Count(); len > 1; len--) {
+                        for (int i = 1; i < len; i++) {
+                            property.GetValue(tElements[i]);
+                            if (((IComparable)property.GetValue(tElements[i])).CompareTo((IComparable)property.GetValue(tElements[i])) > 0) iMax = i;
+                        }
+                        T temp = tElements[len - 1];
+                        tElements[len - 1] = tElements[iMax];
+                        tElements[iMax] = temp;
+                    }
+                }
+            }
+            return tElements;
+        }
+
+        public static bool HasProperty(this Type obj, string propertyName)
+        {
+            return obj.GetProperty(propertyName) != null;
+        }
+
         #endregion
 
     }

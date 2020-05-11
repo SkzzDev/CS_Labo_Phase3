@@ -1,4 +1,5 @@
 ﻿using Core.Elements;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,9 @@ namespace Phase3
 
         private readonly User _userConnected = null;
 
+        private List<User> _users = new List<User>();
+        private List<Competition> _competitions = new List<Competition>();
+
         #endregion
 
         #region Constructors
@@ -30,6 +34,12 @@ namespace Phase3
         public AdministrationPanel(User userConnected)
         {
             InitializeComponent();
+
+            UsersModel usersModel = new UsersModel();
+            _users = usersModel.GetAll();
+
+            CompetitionsModel competitionsModel = new CompetitionsModel();
+            _competitions = competitionsModel.GetAll();
 
             _userConnected = userConnected;
             Fullname.DataContext = _userConnected;
@@ -56,12 +66,12 @@ namespace Phase3
 
         private void LVCompetitions_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Main.Content = new Views.Competitions();
+            Main.Content = new Views.Competitions(_competitions);
         }
 
         private void LVUsers_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Main.Content = new Views.Users();
+            Main.Content = new Views.Users(_users);
         }
 
         private void LVResutls_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

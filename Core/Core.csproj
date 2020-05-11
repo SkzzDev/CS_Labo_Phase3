@@ -50,6 +50,7 @@
     <Compile Include="Elements\Serie.cs" />
     <Compile Include="Elements\Shooter.cs" />
     <Compile Include="Elements\User.cs" />
+    <Compile Include="Exceptions\XML.cs" />
     <Compile Include="Helpers\Functions.cs" />
     <Compile Include="Helpers\PasswordHasher.cs" />
     <Compile Include="Logs.cs" />

@@ -86,9 +86,9 @@ namespace Core.Elements
 
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
-        public Dictionary<string, string> GetInvalidFields()
+        public SortedDictionary<string, string> GetInvalidFields()
         {
-            Dictionary<string, string> fieldsError = new Dictionary<string, string>();
+            SortedDictionary<string, string> fieldsError = new SortedDictionary<string, string>();
             if (Id <= 0)
                 fieldsError.Add("Id", "The serie's id must be strictly positive.");
             if (Points < 0)
@@ -96,6 +96,23 @@ namespace Core.Elements
             if (UpdatedAt < CreatedAt)
                 fieldsError.Add("UpdatedAt", "The serie's UpdatedAt property can't be before its CreatedAt property.");
             return fieldsError;
+        }
+
+        public override bool Equals(object obj)
+        {
+            User userToCompare = obj as User;
+            if (userToCompare == null) {
+                return false;
+            }
+            if (!Id.Equals(userToCompare.Id))
+                return false;
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
 
         #endregion
