@@ -101,17 +101,44 @@ namespace Core
             }
         }
 
-        public static List<T> Find<T>(string filename, Type type, Dictionary<string, object> toSearch) where T : IXMLSavable
+        public static void Update<T>(string filename, T newObj, Dictionary<string, object> conditions) where T : IXMLSavable
         {
-            List<T> toReturn = new List<T>();
-            if (Functions.EveryPropertyExistsInClass(type, toSearch)) {
+            Type type = typeof(T);
+            if (Functions.EveryPropertyExistsInClass(type, conditions)) {
                 try {
-                    List<T> items = GetAll<T>(filename);
-                    foreach (object itemToCheck in items) {
+                    List<T> all = GetAll<T>(filename);
+                    foreach (T itemToCheck in all) {
                         if (itemToCheck.GetType() == type) {
                             bool currentElementIsOk = true;
-                            foreach (KeyValuePair<string, object> itemToSearch in toSearch) {
-                                if (!type.GetProperty(itemToSearch.Key).GetValue(itemToCheck).Equals(itemToSearch.Value)) {
+                            foreach (KeyValuePair<string, object> condition in conditions) {
+                                if (!type.GetProperty(condition.Key).GetValue(itemToCheck).Equals(condition.Value)) {
+                                    currentElementIsOk = false;
+                                    break;
+                                }
+                            }
+                            if (currentElementIsOk)
+                                itemToCheck.Hydrate(newObj);
+                        }
+                    }
+                    Create<T>(filename, all);
+                } catch (Exception) {
+                    throw;
+                }
+            }
+        }
+
+        public static List<T> Find<T>(string filename, Dictionary<string, object> conditions) where T : IXMLSavable
+        {
+            List<T> toReturn = new List<T>();
+            Type type = typeof(T);
+            if (Functions.EveryPropertyExistsInClass(type, conditions)) {
+                try {
+                    List<T> all = GetAll<T>(filename);
+                    foreach (object itemToCheck in all) {
+                        if (itemToCheck.GetType() == type) {
+                            bool currentElementIsOk = true;
+                            foreach (KeyValuePair<string, object> condition in conditions) {
+                                if (!type.GetProperty(condition.Key).GetValue(itemToCheck).Equals(condition.Value)) {
                                     currentElementIsOk = false;
                                     break;
                                 }
@@ -135,7 +162,7 @@ namespace Core
                     object elemToVerifyValue = typeof(T).GetProperty(constraint.Field).GetValue(elemToVerify);
                     Dictionary<string, object> search = new Dictionary<string, object>();
                     search.Add(constraint.Field, elemToVerifyValue);
-                    List<T> results = Find<T>(filename, typeof(T), search);
+                    List<T> results = Find<T>(filename, search);
                     if (results.Count() >= 1)
                         throw new ValueInUniqueFieldAlreadyTaken("A row already exists with the field « " + constraint.Field + " » containing the value « " + elemToVerifyValue.ToString() + " ». Insertion in file « " + constraint.DataFile + ".xml » have been cancelled.");
                 }

@@ -52,6 +52,11 @@ namespace Phase3
 
         #region Events
 
+        private void MI_Nothing_Close(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();

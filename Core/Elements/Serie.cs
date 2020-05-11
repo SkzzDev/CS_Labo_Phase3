@@ -84,6 +84,18 @@ namespace Core.Elements
 
         #region Functions
 
+        public void Hydrate(IXMLSavable iXMLSavable)
+        {
+            if (iXMLSavable is Serie serie) {
+                Id = serie.Id;
+                Points = serie.Points;
+                ShootedBy = serie.ShootedBy;
+                ShootedAt = serie.ShootedAt;
+                CreatedAt = serie.CreatedAt;
+                UpdatedAt = serie.UpdatedAt;
+            }
+        }
+
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
         public SortedDictionary<string, string> GetInvalidFields()

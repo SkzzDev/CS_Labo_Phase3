@@ -68,6 +68,18 @@ namespace Core.Elements
 
         #region Functions
 
+        public void Hydrate(IXMLSavable iXMLSavable)
+        {
+            if (iXMLSavable is Competition competition) {
+                Id = competition.Id;
+                Name = competition.Name;
+                StartDate = competition.StartDate;
+                EndDate = competition.EndDate;
+                CreatedAt = competition.CreatedAt;
+                UpdatedAt = competition.UpdatedAt;
+            }
+        }
+
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
         public SortedDictionary<string, string> GetInvalidFields()

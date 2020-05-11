@@ -73,9 +73,9 @@ namespace Core.Elements
             }
         }
 
-        public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
+        public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get => _updatedAt; set => _updatedAt = value; }
+        public DateTime UpdatedAt { get; set; }
 
         #endregion
 
@@ -110,6 +110,19 @@ namespace Core.Elements
         #endregion
 
         #region Functions
+
+        public void Hydrate(IXMLSavable iXMLSavable)
+        {
+            if (iXMLSavable is User user) {
+                Id = user.Id;
+                Firstname = user.Firstname;
+                Lastname = user.Lastname;
+                Email = user.Email;
+                Password = user.Password;
+                CreatedAt = user.CreatedAt;
+                UpdatedAt = user.UpdatedAt;
+            }
+        }
 
         public bool IsSavable() => GetInvalidFields().Count == 0;
 

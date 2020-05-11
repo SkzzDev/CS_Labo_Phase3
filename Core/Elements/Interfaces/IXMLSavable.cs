@@ -6,6 +6,8 @@ namespace Core.Elements.Interfaces
     public interface IXMLSavable
     {
 
+        void Hydrate(IXMLSavable iXMLSavable);
+
         bool IsSavable();
 
         SortedDictionary<string, string> GetInvalidFields();

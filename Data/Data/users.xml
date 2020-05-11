@@ -10,13 +10,13 @@
     <UpdatedAt>2020-04-26T03:24:28.1772726+02:00</UpdatedAt>
   </User>
   <User>
-    <Email>florent-banneux2@hotmail.com</Email>
-    <Id>2</Id>
-    <Firstname>Laurent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-04-26T03:24:28.1772429+02:00</CreatedAt>
-    <UpdatedAt>2020-04-26T03:24:28.1772726+02:00</UpdatedAt>
+    <Email>mynewemail@hotmail.com</Email>
+    <Id>785</Id>
+    <Firstname>Hi guys!</Firstname>
+    <Lastname>Test</Lastname>
+    <Password>123456</Password>
+    <CreatedAt>2020-05-11T21:04:22.4599001+02:00</CreatedAt>
+    <UpdatedAt>2020-05-11T21:04:22.4599297+02:00</UpdatedAt>
   </User>
   <User>
     <Email>florent-banneux4@hotmail.com</Email>

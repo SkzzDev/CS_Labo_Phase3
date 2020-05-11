@@ -82,6 +82,16 @@ namespace Core.Elements
 
         #region Functions
 
+        public void Hydrate(IXMLSavable iXMLSavable)
+        {
+            if (iXMLSavable is Country country) {
+                Id = country.Id;
+                Name = country.Name;
+                Iso2 = country.Iso2;
+                Iso3 = country.Iso3;
+            }
+        }
+
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
         public SortedDictionary<string, string> GetInvalidFields()

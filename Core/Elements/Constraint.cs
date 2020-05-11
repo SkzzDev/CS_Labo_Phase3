@@ -61,6 +61,15 @@ namespace Core.Elements
 
         #region Functions
 
+        public void Hydrate(IXMLSavable iXMLSavable)
+        {
+            if (iXMLSavable is Constraint constraint) {
+                DataFile = constraint.DataFile;
+                Field = constraint.Field;
+                Type = constraint.Type;
+            }
+        }
+
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
         public SortedDictionary<string, string> GetInvalidFields()

@@ -16,3 +16,6 @@ Questions:
 
 	Users.xaml.cs (View) => BtnReload_Click, demander pour l'exception qui se lance lors de l'ajout d'un utilisateur directement dans le fichier (un élément s'ajoute à la liste lors du reload)
 	=> Cette exception ne se lance pas lors d'un delete en revanche par exemple.
+
+	ScrollViewer => pourquoi quand je réduis la fenêtre de hauteur jusqu'à avoir la scrollbar, le margin 30 du haut sur le StackPanel ne fait plus effet?
+

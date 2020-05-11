@@ -99,6 +99,19 @@ namespace Core.Elements
 
         #region Functions
 
+        public void Hydrate(IXMLSavable iXMLSavable)
+        {
+            if (iXMLSavable is Shooter shooter) {
+                Id = shooter.Id;
+                Firstname = shooter.Firstname;
+                Lastname = shooter.Lastname;
+                Birthday = shooter.Birthday;
+                Nationality = shooter.Nationality;
+                CreatedAt = shooter.CreatedAt;
+                UpdatedAt = shooter.UpdatedAt;
+            }
+        }
+
         public bool IsSavable() => GetInvalidFields().Count == 0;
 
         public SortedDictionary<string, string> GetInvalidFields()

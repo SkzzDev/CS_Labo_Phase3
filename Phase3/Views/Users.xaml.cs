@@ -59,8 +59,8 @@ namespace Phase3.Views
         {
             User user = (User)DGUsers.SelectedItem;
             if (user != null) {
-                // To do
-                // Open new window
+                UpdateUser updateUser = new UpdateUser(_users, user);
+                updateUser.ShowDialog();
             }
         }
 

@@ -30,7 +30,7 @@ namespace Core.Models
                 Dictionary<string, object> search = new Dictionary<string, object>();
                 search.Add(field, value);
                 try {
-                    return XML.Find<User>(DataFile, typeof(User), search).Count() >= 1;
+                    return XML.Find<User>(DataFile, search).Count() >= 1;
                 } catch (Exception) {
                     throw;
                 }
@@ -75,7 +75,7 @@ namespace Core.Models
                     { field, value }
                 };
                 try {
-                    List<User> results = XML.Find<User>(DataFile, typeof(User), search);
+                    List<User> results = XML.Find<User>(DataFile, search);
                     if (results.Count() == 1) {
                         toReturn = results[0];
                     } else if (results.Count() > 1) {
@@ -93,6 +93,13 @@ namespace Core.Models
                 }
             }
             return toReturn;
+        }
+
+        public void UpdateUser(User toFind, User newUser)
+        {
+            Dictionary<string, object> conditions = new Dictionary<string, object>();
+            conditions.Add("Id", toFind.Id);
+            XML.Update<User>(DataFile, newUser, conditions);
         }
 
         public int GetNextId(List<User> users)

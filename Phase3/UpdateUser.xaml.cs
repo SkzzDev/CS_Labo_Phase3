@@ -17,14 +17,16 @@ using System.Windows.Shapes;
 namespace Phase3
 {
     /// <summary>
-    /// Interaction logic for AddNewUser.xaml
+    /// Interaction logic for UpdateUser.xaml
     /// </summary>
-    public partial class AddNewUser : Window
+    public partial class UpdateUser : Window
     {
 
         #region Properties
 
         private List<User> _users = new List<User>();
+
+        private User _userToUpdate;
 
         private readonly UsersModel _usersModel = new UsersModel();
 
@@ -32,34 +34,45 @@ namespace Phase3
 
         #region Constructors
 
-        public AddNewUser(List<User> users)
+        public UpdateUser(List<User> users, User userToUpdate)
         {
             InitializeComponent();
 
             _users = users;
+            _userToUpdate = userToUpdate;
 
-            TBId.Text = _usersModel.GetNextId(users).ToString();
+            TxBUserInfo.Text = "(#" + userToUpdate.Id + ") " + userToUpdate.Email;
+            TBId.Text = userToUpdate.Id.ToString();
+            TBFirstname.Text = userToUpdate.Firstname;
+            TBLastname.Text = userToUpdate.Lastname;
+            TBEmail.Text = userToUpdate.Email;
+            PBPassword.Password = userToUpdate.Password;
         }
 
         #endregion
 
         #region Events
 
-        private void BtnAddUser_Click(object sender, RoutedEventArgs e)
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
             int id;
             if (int.TryParse(TBId.Text, out id)) {
                 User newUser = new User(id, TBFirstname.Text, TBLastname.Text, TBEmail.Text, PBPassword.Password);
                 if (newUser.IsSavable()) {
-                    if (_usersModel.Exists("Id", id)) {
+                    if (id != _userToUpdate.Id && _usersModel.Exists("Id", id)) {
                         MessageBox.Show("The id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else if (_usersModel.Exists("Email", TBEmail.Text)) {
                         MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
                         try {
-                            _usersModel.AddUser(newUser);
-                            _users.Add(newUser);
-                            MessageBox.Show("The user has been added.", "User added !", MessageBoxButton.OK, MessageBoxImage.Information);
+                            _usersModel.UpdateUser(_userToUpdate, newUser);
+                            _userToUpdate.Hydrate(newUser);
+                            MessageBox.Show("The user has been updated.", "User updated !", MessageBoxButton.OK, MessageBoxImage.Information);
                             Close();
                         } catch (Exception ex) {
                             MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -72,11 +85,6 @@ namespace Phase3
             } else {
                 MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-        }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
 
         #endregion

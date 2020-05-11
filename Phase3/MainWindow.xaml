@@ -24,9 +24,9 @@
                 <Image Grid.Column="1" Source="C:\Compilations\C#\Labos\Phase3\Assets\shooter4.png" Height="120" Margin="10 20 0 10" />
             </Grid>
             <StackPanel Width="260" Margin="0 35 0 0">
-                <Label x:Name="LEmail" Content="_Email:" Target="{Binding ElementName=TBEmail}" HorizontalAlignment="Stretch" />
+                <Label x:Name="LEmail" Content="_Email :" Target="{Binding ElementName=TBEmail}" HorizontalAlignment="Stretch" />
                 <TextBox x:Name="TBEmail" Text="" TextWrapping="NoWrap" HorizontalAlignment="Stretch" Padding="0 4 0 4" />
-                <Label x:Name="LPassword" Content="_Password:" Target="{Binding ElementName=PBPassword}" HorizontalAlignment="Stretch" />
+                <Label x:Name="LPassword" Content="_Password :" Target="{Binding ElementName=PBPassword}" HorizontalAlignment="Stretch" />
                 <PasswordBox x:Name="PBPassword" HorizontalAlignment="Stretch" Padding="0 4 0 4" />
             </StackPanel>
             <Canvas Width="260" Margin="0 30 0 0">
