@@ -21,8 +21,6 @@ namespace Core.Elements
         private string _lastname = "";
         private string _email = "";
         private string _password = "";
-        private DateTime _createdAt;
-        private DateTime _updatedAt;
 
         #endregion
 
@@ -149,9 +147,10 @@ namespace Core.Elements
         public override bool Equals(object obj)
         {
             User userToCompare = obj as User;
-            if (userToCompare == null) {
+
+            if (userToCompare == null)
                 return false;
-            }
+
             if (!Id.Equals(userToCompare.Id))
                 return false;
             if (!Email.Equals(userToCompare.Email))
@@ -163,6 +162,14 @@ namespace Core.Elements
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is User toCompare) {
+                return Id.CompareTo(toCompare.Id);
+            }
+            return -1;
         }
 
         #endregion

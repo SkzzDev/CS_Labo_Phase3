@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Core.Elements
 {
@@ -18,9 +20,6 @@ namespace Core.Elements
         private string _firstname = "";
         private string _lastname = "";
         private DateTime _birthday;
-        private Country _nationality;
-        private DateTime _createdAt;
-        private DateTime _updatedAt;
 
         #endregion
 
@@ -66,15 +65,23 @@ namespace Core.Elements
             }
         }
 
-        public Country Nationality
+        [XmlIgnore]
+        public string BirthdayDate
         {
-            get { return _nationality; }
-            set { _nationality = value; }
+            get { return _birthday.ToString("dd/MM/yyyy"); }
         }
 
-        public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
+        [XmlIgnore]
+        public Country Nationality { get; set; } = new Country();
 
-        public DateTime UpdatedAt { get => _updatedAt; set => _updatedAt = value; }
+        public int NationalityCountryId {
+            get { return Nationality.Id; }
+            set { Nationality.Id = value; }
+        }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
 
         #endregion
 
@@ -91,7 +98,17 @@ namespace Core.Elements
             UpdatedAt = updatedAt;
         }
 
-        public Shooter(string id, string firstname, string lastname, DateTime birthday, Country nationality) : this (id, firstname, lastname, birthday, nationality, DateTime.Now, DateTime.Now) { }
+        public Shooter(string id, string firstname, string lastname, DateTime birthday, int nationalityCountryId, DateTime createdAt, DateTime updatedAt) : this(id, firstname, lastname, birthday, null, createdAt, updatedAt)
+        {
+            NationalityCountryId = nationalityCountryId;
+        }
+
+        public Shooter(string id, string firstname, string lastname, DateTime birthday, Country nationality) : this(id, firstname, lastname, birthday, nationality, DateTime.Now, DateTime.Now) { }
+
+        public Shooter(string id, string firstname, string lastname, DateTime birthday, int nationalityCountryId) : this(id, firstname, lastname, birthday, null, DateTime.Now, DateTime.Now)
+        {
+            NationalityCountryId = nationalityCountryId;
+        }
 
         public Shooter() { }
 
@@ -126,7 +143,7 @@ namespace Core.Elements
                 fieldsError.Add("Firstname", "The shooter's firstname can't be empty.");
             if (Lastname.Length <= 0)
                 fieldsError.Add("Lastname", "The shooter's lastname can't be empty.");
-            if (Birthday < DateTime.Now)
+            if (Birthday > DateTime.Now)
                 fieldsError.Add("Birthday", "The shooter's birthday can't be later than now.");
             if (Birthday.Year < 1907 - 100) // ISSF Foundation, less 100 years
                 fieldsError.Add("Birthday", "The shooter's birthday can't be before year 1807 (100 years before the ISSF foundation in 1907).");
@@ -146,11 +163,12 @@ namespace Core.Elements
 
         public override bool Equals(object obj)
         {
-            User userToCompare = obj as User;
-            if (userToCompare == null) {
+            Shooter shooterToCompare = obj as Shooter;
+
+            if (shooterToCompare == null)
                 return false;
-            }
-            if (!Id.Equals(userToCompare.Id))
+
+            if (!Id.Equals(shooterToCompare.Id))
                 return false;
 
             return true;
@@ -159,6 +177,14 @@ namespace Core.Elements
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Shooter toCompare) {
+                return Id.CompareTo(toCompare.Id);
+            }
+            return -1;
         }
 
         #endregion

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -77,7 +78,7 @@ namespace Core.Helpers
         {
             if (HasProperty(typeof(T), onProperty)) {
                 PropertyInfo property = typeof(T).GetProperty(onProperty);
-                if (property.PropertyType is IComparable) {
+                if (property.PropertyType is IComparable comparableProperty) {
                     int iMax = 0;
                     for (int len = tElements.Count(); len > 1; len--) {
                         for (int i = 1; i < len; i++) {
@@ -96,6 +97,15 @@ namespace Core.Helpers
         public static bool HasProperty(this Type obj, string propertyName)
         {
             return obj.GetProperty(propertyName) != null;
+        }
+
+        public static void Sort<T>(this ObservableCollection<T> collection) where T : IComparable
+        {
+            List<T> sorted = collection.OrderBy(x => x).ToList();
+            collection.Clear();
+            for (int i = 0; i < sorted.Count(); i++) {
+                collection.Add(sorted[i]);
+            }
         }
 
         #endregion

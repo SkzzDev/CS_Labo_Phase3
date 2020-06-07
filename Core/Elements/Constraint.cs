@@ -82,6 +82,14 @@ namespace Core.Elements
             return fieldsError;
         }
 
+        public int CompareTo(object obj)
+        {
+            if (obj is Constraint toCompare) {
+                return Field.CompareTo(toCompare.Field);
+            }
+            return -1;
+        }
+
         #endregion
 
     }

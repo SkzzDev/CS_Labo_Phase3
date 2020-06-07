@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace Core.Elements.Interfaces
 {
-    public interface IXMLSavable
+    public interface IXMLSavable : IComparable
     {
 
         void Hydrate(IXMLSavable iXMLSavable);

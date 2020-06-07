@@ -13,7 +13,7 @@
         <Border DockPanel.Dock="Top" CornerRadius="3" BorderThickness="0 1 0 1" BorderBrush="#103351" HorizontalAlignment="Stretch">
             <TextBlock Grid.Column="0" Padding="20" Background="#0761B6" Foreground="White" TextWrapping="NoWrap" FontSize="22px" FontWeight="Bold" VerticalAlignment="Center">
                 <TextBlock>Update a user</TextBlock>
-                <TextBlock x:Name="TxBUserInfo" FontSize="16px" FontWeight="Normal" TextTrimming="CharacterEllipsis" Width="260" Margin="10 0 0 0"></TextBlock>
+                <TextBlock x:Name="TxBInfo" FontSize="16px" FontWeight="Normal" TextTrimming="CharacterEllipsis" Width="260" Margin="10 0 0 0"></TextBlock>
             </TextBlock>
         </Border>
         <StackPanel Margin="20">

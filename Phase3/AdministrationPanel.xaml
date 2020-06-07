@@ -74,6 +74,14 @@
                             </Border>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="LVShooters" MouseLeftButtonUp="LVShooters_MouseLeftButtonUp">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\shooter.png" Height="32" Width="32" Margin="5 0 10 0" />
+                            <Border BorderBrush="{x:Null}" Height="40">
+                                <TextBlock VerticalAlignment="Center" FontSize="16">Shooters</TextBlock>
+                            </Border>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem x:Name="LVUsers" MouseLeftButtonUp="LVUsers_MouseLeftButtonUp">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Compilations\C#\Labos\Phase3\Assets\Icons\user.png" Height="32" Width="32" Margin="5 0 10 0" />

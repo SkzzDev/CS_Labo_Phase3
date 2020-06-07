@@ -2,6 +2,7 @@
 using Core.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,10 @@ using System.Threading.Tasks;
 namespace Core.Models
 {
 
-    public class CompetitionsModel
+    public class CompetitionsModel : Model
     {
 
         #region Properties
-
-        private string DataFile = Functions.GetDataFilePath("competitions");
 
         #endregion
 
@@ -23,6 +22,7 @@ namespace Core.Models
 
         public CompetitionsModel()
         {
+            DataFile = Functions.GetDataFilePath("competitions");
             if (!File.Exists(DataFile)) {
                 try {
                     XML.Create<Competition>(DataFile, new List<Competition>());
@@ -36,19 +36,31 @@ namespace Core.Models
 
         #region Functions
 
-        public List<Competition> GetAll()
+        public int GetNextId(ObservableCollection<Competition> competitions)
         {
-            try {
-                return XML.GetAll<Competition>(DataFile);
-            } catch (Exception e) {
-                Logs.Write(e.Message);
+            if (competitions != null && competitions.Count() > 0) {
+
+                Functions.Sort<Competition>(competitions);
+
+                // Find the first hole
+                int currentHole = 1;
+                foreach (Competition Competition in competitions) {
+                    if (Competition.Id > currentHole) {
+                        return currentHole;
+                    } else {
+                        currentHole++;
+                    }
+                }
+
+                // If no hole found until the end (users were perfectly ordered)
+                return currentHole;
             }
-            return new List<Competition>();
+            return 1;
         }
 
         public int GetNumberOfCompetitions()
         {
-            return GetAll().Count();
+            return GetAll<Competition>().Count();
         }
 
         #endregion

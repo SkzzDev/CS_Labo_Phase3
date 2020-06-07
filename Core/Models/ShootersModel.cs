@@ -10,13 +10,12 @@ using System.Threading.Tasks;
 namespace Core.Models
 {
 
-    public class ShootersModel
+    public class ShootersModel : Model
     {
-
-        private string DataFile = Functions.GetDataFilePath("shooters");
 
         public ShootersModel()
         {
+            DataFile = Functions.GetDataFilePath("shooters");
             if (!File.Exists(DataFile)) {
                 try {
                     XML.Create<Shooter>(DataFile, new List<Shooter>());
@@ -28,12 +27,7 @@ namespace Core.Models
 
         public int GetNumberOfShooters()
         {
-            try {
-                return XML.GetAll<Shooter>(DataFile).Count();
-            } catch (Exception e) {
-                Logs.Write(e.Message);
-            }
-            return 0;
+            return GetAll<Shooter>().Count();
         }
 
     }

@@ -83,21 +83,30 @@ namespace Core
             return toReturn;
         }
 
-        public static void Delete<T>(string filename, T obj) where T : IXMLSavable
+        public static void Delete<T>(string filename, Dictionary<string, object> conditions) where T : IXMLSavable
         {
-            try {
-                List<T> all = GetAll<T>(filename);
-                List<T> toRemove = new List<T>();
-                foreach (T t in all) {
-                    if (t.Equals(obj)) {
-                        toRemove.Add(t);
+            Type type = typeof(T);
+            if (Functions.EveryPropertyExistsInClass(type, conditions)) {
+                try {
+                    List<T> all = GetAll<T>(filename);
+                    List<T> toRemove = new List<T>();
+                    foreach (T itemToCheck in all) {
+                        bool currentElementMatches = true;
+                        foreach (KeyValuePair<string, object> condition in conditions) {
+                            if (!type.GetProperty(condition.Key).GetValue(itemToCheck).Equals(condition.Value)) {
+                                currentElementMatches = false;
+                                break;
+                            }
+                        }
+                        if (currentElementMatches)
+                            toRemove.Add(itemToCheck);
                     }
+                    foreach (T t in toRemove)
+                        all.Remove(t);
+                    Create<T>(filename, all);
+                } catch (Exception) {
+                    throw;
                 }
-                foreach (T t in toRemove)
-                    all.Remove(t);
-                Create<T>(filename, all);
-            } catch (Exception) {
-                throw;
             }
         }
 
@@ -108,17 +117,15 @@ namespace Core
                 try {
                     List<T> all = GetAll<T>(filename);
                     foreach (T itemToCheck in all) {
-                        if (itemToCheck.GetType() == type) {
-                            bool currentElementIsOk = true;
-                            foreach (KeyValuePair<string, object> condition in conditions) {
-                                if (!type.GetProperty(condition.Key).GetValue(itemToCheck).Equals(condition.Value)) {
-                                    currentElementIsOk = false;
-                                    break;
-                                }
+                        bool currentElementMatches = true;
+                        foreach (KeyValuePair<string, object> condition in conditions) {
+                            if (!type.GetProperty(condition.Key).GetValue(itemToCheck).Equals(condition.Value)) {
+                                currentElementMatches = false;
+                                break;
                             }
-                            if (currentElementIsOk)
-                                itemToCheck.Hydrate(newObj);
                         }
+                        if (currentElementMatches)
+                            itemToCheck.Hydrate(newObj);
                     }
                     Create<T>(filename, all);
                 } catch (Exception) {

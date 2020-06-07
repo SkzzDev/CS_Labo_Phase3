@@ -15,10 +15,10 @@ namespace Core.Elements
         #region MemberVars
 
         // Official United Nations' (UN) codification
-        private int _id;
-        private string _name;
-        private string _iso2;
-        private string _iso3;
+        private int _id = -1;
+        private string _name = "";
+        private string _iso2 = "";
+        private string _iso3 = "";
 
         #endregion
 
@@ -112,11 +112,12 @@ namespace Core.Elements
 
         public override bool Equals(object obj)
         {
-            User userToCompare = obj as User;
-            if (userToCompare == null) {
+            Country countryToCompare = obj as Country;
+
+            if (countryToCompare == null)
                 return false;
-            }
-            if (!Id.Equals(userToCompare.Id))
+
+            if (!Id.Equals(countryToCompare.Id))
                 return false;
 
             return true;
@@ -125,6 +126,14 @@ namespace Core.Elements
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Country toCompare) {
+                return Id.CompareTo(toCompare.Id);
+            }
+            return -1;
         }
 
         #endregion

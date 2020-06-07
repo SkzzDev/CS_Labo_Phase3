@@ -13,12 +13,8 @@ namespace Core.Elements
 
         #region MemberVars
 
-        private int _id;
-        private string _name;
-        private DateTime _startDate;
-        private DateTime _endDate;
-        private DateTime _createdAt;
-        private DateTime _updatedAt;
+        private int _id = -1;
+        private string _name = "";
 
         #endregion
 
@@ -42,27 +38,31 @@ namespace Core.Elements
             }
         }
 
-        public DateTime StartDate
-        {
-            get { return _startDate; }
-            set { _startDate = value; }
-        }
+        public DateTime StartDate { get; set; }
 
-        public DateTime EndDate
-        {
-            get { return _endDate; }
-            set { _endDate = value; }
-        }
+        public DateTime EndDate { get; set; }
 
-        public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
+        public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get => _updatedAt; set => _updatedAt = value; }
+        public DateTime UpdatedAt { get; set; }
 
         #endregion
 
         #region Constructors
 
+        public Competition(int id, string name, DateTime startDate, DateTime endDate, DateTime createdAt, DateTime updatedAt)
+        {
+            Id = id;
+            Name = name;
+            StartDate = startDate;
+            EndDate = endDate;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+        }
 
+        public Competition(Competition competition) : this (competition.Id, competition.Name, competition.StartDate, competition.EndDate, competition.CreatedAt, competition.UpdatedAt) { }
+
+        public Competition() { }
 
         #endregion
 
@@ -100,11 +100,12 @@ namespace Core.Elements
 
         public override bool Equals(object obj)
         {
-            User userToCompare = obj as User;
-            if (userToCompare == null) {
+            Competition competitionToCompare = obj as Competition;
+
+            if (competitionToCompare == null)
                 return false;
-            }
-            if (!Id.Equals(userToCompare.Id))
+
+            if (!Id.Equals(competitionToCompare.Id))
                 return false;
 
             return true;
@@ -113,6 +114,14 @@ namespace Core.Elements
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Competition toCompare) {
+                return Id.CompareTo(toCompare.Id);
+            }
+            return -1;
         }
 
         #endregion

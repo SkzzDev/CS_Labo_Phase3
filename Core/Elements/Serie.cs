@@ -20,12 +20,8 @@ namespace Core.Elements
 
         #region MemberVars
 
-        private int _id;
-        private float _points;
-        private Shooter _shootedBy;
-        private Competition _shootedAt;
-        private DateTime _createdAt;
-        private DateTime _updatedAt;
+        private int _id = -1;
+        private float _points = 0;
 
         #endregion
 
@@ -49,13 +45,13 @@ namespace Core.Elements
             }
         }
 
-        public Shooter ShootedBy { get => _shootedBy; set => _shootedBy = value; }
+        public Shooter ShootedBy { get; set; }
 
-        public Competition ShootedAt { get => _shootedAt; set => _shootedAt = value; }
+        public Competition ShootedAt { get; set; }
 
-        public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
+        public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get => _updatedAt; set => _updatedAt = value; }
+        public DateTime UpdatedAt { get; set; }
 
         #endregion
 
@@ -112,11 +108,12 @@ namespace Core.Elements
 
         public override bool Equals(object obj)
         {
-            User userToCompare = obj as User;
-            if (userToCompare == null) {
+            Serie serieToCompare = obj as Serie;
+
+            if (serieToCompare == null)
                 return false;
-            }
-            if (!Id.Equals(userToCompare.Id))
+
+            if (!Id.Equals(serieToCompare.Id))
                 return false;
 
             return true;
@@ -125,6 +122,14 @@ namespace Core.Elements
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Serie toCompare) {
+                return Id.CompareTo(toCompare.Id);
+            }
+            return -1;
         }
 
         #endregion

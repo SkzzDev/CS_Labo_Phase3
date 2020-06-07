@@ -3,6 +3,7 @@ using Core.Elements;
 using Core.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,52 +15,17 @@ namespace Core.Models
     public class UsersModel : Model
     {
 
-        private string DataFile = Functions.GetDataFilePath("users");
-
         public UsersModel()
         {
+            DataFile = Functions.GetDataFilePath("users");
             if (!File.Exists(DataFile))
                 XML.Create<User>(DataFile, new List<User>());
         }
 
-        public bool Exists(string field = "Id", object value = null)
-        {
-            if (typeof(User).GetProperty(field) == null) {
-                Logs.Write("The parameter « " + field + " » doesn't exist in the class « User ».");
-            } else {
-                Dictionary<string, object> search = new Dictionary<string, object>();
-                search.Add(field, value);
-                try {
-                    return XML.Find<User>(DataFile, search).Count() >= 1;
-                } catch (Exception) {
-                    throw;
-                }
-            }
-            return false;
-        }
-
-        public void AddUser(User user)
+        public void RemakeUsersFile(ObservableCollection<User> users)
         {
             try {
-                XML.Add<User>(DataFile, user);
-            } catch (Exception) {
-                throw;
-            }
-        }
-
-        public void RemakeUsersFile(List<User> users)
-        {
-            try {
-                XML.Create<User>(DataFile, users);
-            } catch (Exception) {
-                throw;
-            }
-        }
-
-        public List<User> GetAll()
-        {
-            try {
-                return XML.GetAll<User>(DataFile);
+                XML.Create<User>(DataFile, new List<User>(users));
             } catch (Exception) {
                 throw;
             }
@@ -95,27 +61,11 @@ namespace Core.Models
             return toReturn;
         }
 
-        public void UpdateUser(User toFind, User newUser)
+        public int GetNextId(ObservableCollection<User> users)
         {
-            Dictionary<string, object> conditions = new Dictionary<string, object>();
-            conditions.Add("Id", toFind.Id);
-            XML.Update<User>(DataFile, newUser, conditions);
-        }
-
-        public int GetNextId(List<User> users)
-        {
-            // Pretty bad approach but there isn't many users and users will usually be near perfectly ordered if not so...
             if (users != null && users.Count() > 0) {
-                // Sort users
-                int iMax = 0;
-                for (int len = users.Count(); len > 1; len--) {
-                    for (int i = 1; i < len; i++) {
-                        if (users[i].Id > users[iMax].Id) iMax = i;
-                    }
-                    User temp = new User(users[len - 1]);
-                    users[len - 1] = users[iMax];
-                    users[iMax] = temp;
-                }
+
+                Functions.Sort<User>(users);
 
                 // Find the first hole
                 int currentHole = 1;
@@ -133,15 +83,6 @@ namespace Core.Models
             return 1;
         }
 
-        public void DeleteUser(User user)
-        {
-            try {
-                XML.Delete<User>(DataFile, user);
-            } catch (Exception) {
-                throw;
-            }
-        }
-
         public string GetUserProfilePicture(User user)
         {
             return GetUserProfilePicture(user.Id);
@@ -153,7 +94,7 @@ namespace Core.Models
             if (File.Exists(profilePictures + "\\" + userId + ".png")) {
                 return profilePictures + "\\" + userId + ".png";
             }
-            return profilePictures + "\\default.png";
+            return profilePictures + "\\_default.png";
         }
 
     }

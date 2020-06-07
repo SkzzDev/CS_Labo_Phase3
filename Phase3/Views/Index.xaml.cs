@@ -1,6 +1,8 @@
-﻿using Core.Models;
+﻿using Core.Elements;
+using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,28 +28,11 @@ namespace Phase3.Views
 
         #region Constructors
 
-        public Index()
+        public Index(ObservableCollection<Shooter> shooters, ObservableCollection<Competition> competitions)
         {
             InitializeComponent();
 
-            RecalculateStats();
-        }
-
-        #endregion
-
-        #region Events
-
-        #endregion
-
-        #region Functions
-
-        public void RecalculateStats()
-        {
-            ShootersModel shootersModel = new ShootersModel();
-            int shootersNumber = shootersModel.GetNumberOfShooters();
-
-            CompetitionsModel competitionsModel = new CompetitionsModel();
-            int compsNumber = competitionsModel.GetNumberOfCompetitions();
+            int shootersNumber = shooters.Count, competitionsNumber = competitions.Count;
 
             Stats.Text = "";
 
@@ -55,7 +40,7 @@ namespace Phase3.Views
 
             if (shootersNumber == 0) {
                 Stats.Inlines.Add("no shooter is registered");
-            } else if(shootersNumber == 1) {
+            } else if (shootersNumber == 1) {
                 Stats.Inlines.Add(new Run("1") { FontWeight = FontWeights.Bold });
                 Stats.Inlines.Add(" shooter is registered");
             } else if (shootersNumber > 1) {
@@ -65,18 +50,26 @@ namespace Phase3.Views
 
             Stats.Inlines.Add(" et ");
 
-            if (shootersNumber == 0) {
+            if (competitionsNumber == 0) {
                 Stats.Inlines.Add("no competition has been organised");
-            } else if (compsNumber == 1) {
+            } else if (competitionsNumber == 1) {
                 Stats.Inlines.Add(new Run("1") { FontWeight = FontWeights.Bold });
                 Stats.Inlines.Add(" competition has been organised");
-            } else if (compsNumber > 1) {
-                Stats.Inlines.Add(new Run(compsNumber.ToString()) { FontWeight = FontWeights.Bold });
+            } else if (competitionsNumber > 1) {
+                Stats.Inlines.Add(new Run(competitionsNumber.ToString()) { FontWeight = FontWeights.Bold });
                 Stats.Inlines.Add(" competitions have been organised");
             }
 
             Stats.Inlines.Add(".");
         }
+
+        #endregion
+
+        #region Events
+
+        #endregion
+
+        #region Functions
 
         #endregion
 

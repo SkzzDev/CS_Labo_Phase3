@@ -2,6 +2,7 @@
 using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,8 +25,9 @@ namespace Phase3
 
         private readonly User _userConnected = null;
 
-        private List<User> _users = new List<User>();
-        private List<Competition> _competitions = new List<Competition>();
+        private ObservableCollection<User> _users = new ObservableCollection<User>();
+        private ObservableCollection<Competition> _competitions = new ObservableCollection<Competition>();
+        private ObservableCollection<Shooter> _shooters = new ObservableCollection<Shooter>();
 
         #endregion
 
@@ -36,16 +38,19 @@ namespace Phase3
             InitializeComponent();
 
             UsersModel usersModel = new UsersModel();
-            _users = usersModel.GetAll();
+            _users = usersModel.GetAll<User>();
 
             CompetitionsModel competitionsModel = new CompetitionsModel();
-            _competitions = competitionsModel.GetAll();
+            _competitions = competitionsModel.GetAll<Competition>();
+
+            ShootersModel shootersModel = new ShootersModel();
+            _shooters = shootersModel.GetAll<Shooter>();
 
             _userConnected = userConnected;
             Fullname.DataContext = _userConnected;
             ImgProfilePicture.DataContext = _userConnected;
 
-            Main.Content = new Views.Index();
+            Main.Content = new Views.Index(_shooters, _competitions);
         }
 
         #endregion
@@ -66,7 +71,7 @@ namespace Phase3
 
         private void LVIndex_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Main.Content = new Views.Index();
+            Main.Content = new Views.Index(_shooters, _competitions);
         }
 
         private void LVCompetitions_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -79,6 +84,11 @@ namespace Phase3
             Main.Content = new Views.Users(_users);
         }
 
+        private void LVShooters_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Main.Content = new Views.Shooters(_shooters);
+        }
+
         private void LVResutls_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Main.Content = new Views.Results();
@@ -89,7 +99,6 @@ namespace Phase3
         #region Functions
 
         #endregion
-
     }
 
 }

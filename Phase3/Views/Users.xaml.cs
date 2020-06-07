@@ -2,6 +2,7 @@
 using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,13 +24,13 @@ namespace Phase3.Views
 
         #region Properties
 
-        private List<User> _users = new List<User>();
+        private ObservableCollection<User> _users = new ObservableCollection<User>();
 
         #endregion
 
         #region Constructors
 
-        public Users(List<User> users)
+        public Users(ObservableCollection<User> users)
         {
             InitializeComponent();
 
@@ -46,7 +47,9 @@ namespace Phase3.Views
         {
             UsersModel usersModel = new UsersModel();
             _users.Clear();
-            _users.AddRange(usersModel.GetAll()); // Throw exception if there is more users than before the reload
+            foreach (User user in usersModel.GetAll<User>()) {
+                _users.Add(user);
+            }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -57,7 +60,7 @@ namespace Phase3.Views
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            User user = (User)DGUsers.SelectedItem;
+            User user = DGUsers.SelectedItem as User;
             if (user != null) {
                 UpdateUser updateUser = new UpdateUser(_users, user);
                 updateUser.ShowDialog();
@@ -66,12 +69,14 @@ namespace Phase3.Views
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            User user = (User)DGUsers.SelectedItem;
+            User user = DGUsers.SelectedItem as User;
             if (user != null) {
-                _users.Remove(user);
                 UsersModel usersModel = new UsersModel();
                 try {
-                    usersModel.DeleteUser(user);
+                    Dictionary<string, object> conditions = new Dictionary<string, object>();
+                    conditions.Add("Id", user.Id);
+                    usersModel.Delete<User>(conditions);
+                    _users.Remove(user);
                     MessageBox.Show("The user has been deleted.", "User deleted !", MessageBoxButton.OK, MessageBoxImage.Information);
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);

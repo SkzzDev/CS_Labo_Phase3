@@ -2,6 +2,7 @@
 using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace Phase3
 
         #region Properties
 
-        private List<User> _users = new List<User>();
+        private ObservableCollection<User> _users = new ObservableCollection<User>();
 
         private User _userToUpdate;
 
@@ -34,14 +35,14 @@ namespace Phase3
 
         #region Constructors
 
-        public UpdateUser(List<User> users, User userToUpdate)
+        public UpdateUser(ObservableCollection<User> users, User userToUpdate)
         {
             InitializeComponent();
 
             _users = users;
             _userToUpdate = userToUpdate;
 
-            TxBUserInfo.Text = "(#" + userToUpdate.Id + ") " + userToUpdate.Email;
+            TxBInfo.Text = "(#" + userToUpdate.Id + ") " + userToUpdate.Email;
             TBId.Text = userToUpdate.Id.ToString();
             TBFirstname.Text = userToUpdate.Firstname;
             TBLastname.Text = userToUpdate.Lastname;
@@ -64,13 +65,15 @@ namespace Phase3
             if (int.TryParse(TBId.Text, out id)) {
                 User newUser = new User(id, TBFirstname.Text, TBLastname.Text, TBEmail.Text, PBPassword.Password);
                 if (newUser.IsSavable()) {
-                    if (id != _userToUpdate.Id && _usersModel.Exists("Id", id)) {
+                    if (id != _userToUpdate.Id && _usersModel.Exists<User>("Id", id)) {
                         MessageBox.Show("The id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (_usersModel.Exists("Email", TBEmail.Text)) {
+                    } else if (_usersModel.Exists<User>("Email", TBEmail.Text)) {
                         MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
                         try {
-                            _usersModel.UpdateUser(_userToUpdate, newUser);
+                            Dictionary<string, object> conditions = new Dictionary<string, object>();
+                            conditions.Add("Id", _userToUpdate.Id);
+                            _usersModel.Update<User>(newUser, conditions);
                             _userToUpdate.Hydrate(newUser);
                             MessageBox.Show("The user has been updated.", "User updated !", MessageBoxButton.OK, MessageBoxImage.Information);
                             Close();

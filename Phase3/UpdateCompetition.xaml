@@ -1,0 +1,59 @@
+﻿<Window x:Class="Phase3.UpdateCompetition"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Phase3"
+        mc:Ignorable="d"
+        Title="SRA - Update a competition" Height="440" Width="460" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary Source="Styles/Buttons.xaml" />
+    </Window.Resources>
+    <DockPanel>
+        <Border DockPanel.Dock="Top" CornerRadius="3" BorderThickness="0 1 0 1" BorderBrush="#103351" HorizontalAlignment="Stretch">
+            <TextBlock Grid.Column="0" Padding="20" Background="#0761B6" Foreground="White" TextWrapping="NoWrap" FontSize="22px" FontWeight="Bold" VerticalAlignment="Center">
+                <TextBlock>Update a competition</TextBlock>
+                <TextBlock x:Name="TxBInfo" FontSize="16px" FontWeight="Normal" TextTrimming="CharacterEllipsis" Width="190"/>
+            </TextBlock>
+        </Border>
+        <StackPanel Margin="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0">
+                    <Label Content="Id :" FontWeight="Bold" />
+                    <TextBox x:Name="TBId" Padding="4" />
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="Caution! We don't recommand modifing the competition's id. This might cause references issues." Margin="20 10 0 0" TextWrapping="Wrap" TextAlignment="Center" />
+            </Grid>
+            <StackPanel Grid.Column="0" Margin="0 20 0 0">
+                <Label Content="Competition name :" FontWeight="Bold" />
+                <TextBox x:Name="TBName" Padding="4" />
+            </StackPanel>
+            <Grid Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                    <Label Content="Starting date :" FontWeight="Bold" />
+                    <DatePicker x:Name="DPStartDate" Padding="4" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                    <Label Content="Ending date :" FontWeight="Bold" />
+                    <DatePicker x:Name="DPEndDate" Padding="4" />
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0 20 0 0">
+                <Border Grid.Column="2" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
+                    <Button x:Name="BtnUpdate" Style="{StaticResource GreenBtn}" VerticalAlignment="Center" Padding="16 4" FontSize="14" Click="BtnUpdate_Click">Update the Competition</Button>
+                </Border>
+                <Border Grid.Column="3" CornerRadius="15" VerticalAlignment="Center">
+                    <Button x:Name="BtnDelete" Style="{StaticResource RedBtn}" VerticalAlignment="Center" Padding="16 4" FontSize="14" Click="BtnCancel_Click">Cancel</Button>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

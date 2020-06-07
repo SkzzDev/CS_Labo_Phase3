@@ -56,6 +56,7 @@
     <Compile Include="Logs.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Models\CompetitionsModel.cs" />
+    <Compile Include="Models\SeriesModel.cs" />
     <Compile Include="Models\CountriesModel.cs" />
     <Compile Include="Models\ShootersModel.cs" />
     <Compile Include="Models\UsersModel.cs" />

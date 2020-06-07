@@ -1,7 +1,9 @@
 ﻿using Core.Elements;
+using Core.Helpers;
 using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
@@ -24,7 +26,7 @@ namespace Phase3
 
         #region Properties
 
-        private List<User> _users = new List<User>();
+        private ObservableCollection<User> _users = new ObservableCollection<User>();
 
         private readonly UsersModel _usersModel = new UsersModel();
 
@@ -32,7 +34,7 @@ namespace Phase3
 
         #region Constructors
 
-        public AddNewUser(List<User> users)
+        public AddNewUser(ObservableCollection<User> users)
         {
             InitializeComponent();
 
@@ -45,19 +47,22 @@ namespace Phase3
 
         #region Events
 
-        private void BtnAddUser_Click(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            int id;
-            if (int.TryParse(TBId.Text, out id)) {
+            if (int.TryParse(TBId.Text, out int id)) {
                 User newUser = new User(id, TBFirstname.Text, TBLastname.Text, TBEmail.Text, PBPassword.Password);
                 if (newUser.IsSavable()) {
-                    if (_usersModel.Exists("Id", id)) {
-                        MessageBox.Show("The id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (_usersModel.Exists("Email", TBEmail.Text)) {
+                    if (_usersModel.Exists<User>("Id", id)) {
+                        MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else if (!Functions.IsEmailValid(TBEmail.Text)) {
+                        MessageBox.Show("This email format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else if (!Functions.IsPasswordValid(PBPassword.Password)) {
+                        MessageBox.Show("This password format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else if (_usersModel.Exists<User>("Email", TBEmail.Text)) {
                         MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
                         try {
-                            _usersModel.AddUser(newUser);
+                            _usersModel.Add<User>(newUser);
                             _users.Add(newUser);
                             MessageBox.Show("The user has been added.", "User added !", MessageBoxButton.OK, MessageBoxImage.Information);
                             Close();

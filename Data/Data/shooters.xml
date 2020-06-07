@@ -1,2 +1,30 @@
 <?xml version="1.0"?>
-<ArrayOfShooter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfShooter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Shooter>
+    <Id>2020BANNFL01</Id>
+    <Firstname>Florent</Firstname>
+    <Lastname>Banneux</Lastname>
+    <Birthday>2000-08-14T00:00:00</Birthday>
+    <NationalityCountryId>56</NationalityCountryId>
+    <CreatedAt>2020-06-07T14:24:21.4639619+02:00</CreatedAt>
+    <UpdatedAt>2020-06-07T14:24:21.4639643+02:00</UpdatedAt>
+  </Shooter>
+  <Shooter>
+    <Id>2020BEBRWI01</Id>
+    <Firstname>William</Firstname>
+    <Lastname>Bebronne</Lastname>
+    <Birthday>1999-12-26T00:00:00</Birthday>
+    <NationalityCountryId>56</NationalityCountryId>
+    <CreatedAt>2020-06-07T14:24:21.4639619+02:00</CreatedAt>
+    <UpdatedAt>2020-06-07T14:24:21.4639643+02:00</UpdatedAt>
+  </Shooter>
+  <Shooter>
+    <Id>2020CROERO01</Id>
+    <Firstname>Robert</Firstname>
+    <Lastname>Croes</Lastname>
+    <Birthday>1960-04-12T00:00:00</Birthday>
+    <NationalityCountryId>56</NationalityCountryId>
+    <CreatedAt>2020-06-07T14:24:21.4639619+02:00</CreatedAt>
+    <UpdatedAt>2020-06-07T14:24:21.4639643+02:00</UpdatedAt>
+  </Shooter>
+</ArrayOfShooter>
