@@ -18,10 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AddNewShooter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="AddNewCompetition.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UpdateCompetition.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UpdateShooter.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Results.xaml.cs">
@@ -39,6 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="AddNewShooter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="AddNewCompetition.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -46,6 +55,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UpdateCompetition.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UpdateShooter.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Results.xaml">

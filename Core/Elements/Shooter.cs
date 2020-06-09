@@ -30,10 +30,7 @@ namespace Core.Elements
             get { return _id; }
             set {
                 if (value.Length > 0) {
-                    value = value.ToUpper();
-                    Regex r = new Regex("^[0-9]{4}[A-Z]{6}[0-9]{2}$");
-                    if (r.IsMatch(value))
-                        _id = value;
+                    _id = value.ToUpper();
                 }
             }
         }
@@ -60,7 +57,7 @@ namespace Core.Elements
         {
             get { return _birthday; }
             set {
-                if (value < DateTime.Now && value.Year >= 1907 - 100)
+                if (value <= DateTime.Now && value.Year >= 1907 - 100)
                     _birthday = value;
             }
         }
@@ -93,7 +90,7 @@ namespace Core.Elements
             Firstname = firstname;
             Lastname = lastname;
             Birthday = birthday;
-            Nationality = nationality;
+            Nationality = new Country(nationality);
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
         }
@@ -138,7 +135,7 @@ namespace Core.Elements
             if (Id.Length <= 0)
                 fieldsError.Add("Id", "The shooter's id can't be empty.");
             else if (!r.IsMatch(Id))
-                fieldsError.Add("Id", "The shooter's id must match the pattern.");
+                fieldsError.Add("Id", "The shooter's id must match the pattern ^[0-9]{4}[A-Z]{6}[0-9]{2}$.");
             if (Firstname.Length <= 0)
                 fieldsError.Add("Firstname", "The shooter's firstname can't be empty.");
             if (Lastname.Length <= 0)
@@ -146,17 +143,9 @@ namespace Core.Elements
             if (Birthday > DateTime.Now)
                 fieldsError.Add("Birthday", "The shooter's birthday can't be later than now.");
             if (Birthday.Year < 1907 - 100) // ISSF Foundation, less 100 years
-                fieldsError.Add("Birthday", "The shooter's birthday can't be before year 1807 (100 years before the ISSF foundation in 1907).");
+                fieldsError.Add("Birthday", Birthday.Year.ToString() + "The shooter's birthday can't be before year 1807 (100 years before the ISSF foundation in 1907).");
             if (UpdatedAt < CreatedAt)
                 fieldsError.Add("UpdatedAt", "The shooter's UpdatedAt property can't be before his CreatedAt property.");
-
-            if (!fieldsError.ContainsKey("Id") && !fieldsError.ContainsKey("Firstname") && !fieldsError.ContainsKey("Lastname")) {
-                string lastnameLetters = Lastname.Substring(0, 4).ToUpper();
-                string firstnameLetters = Firstname.Substring(0, 2).ToUpper();
-                r = new Regex("^(19|20)[0-9]{2}" + lastnameLetters + firstnameLetters + "[0-9]{2}$");
-                if (!r.IsMatch(Id))
-                    fieldsError.Add("Id", "The shooter's id doesn't match with the others shooter's data.");
-            }
 
             return fieldsError;
         }

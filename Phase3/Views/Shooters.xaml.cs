@@ -25,16 +25,18 @@ namespace Phase3.Views
         #region Properties
 
         private ObservableCollection<Shooter> _shooters = new ObservableCollection<Shooter>();
+        private ObservableCollection<Country> _countries = new ObservableCollection<Country>();
 
         #endregion
 
         #region Constructors
 
-        public Shooters(ObservableCollection<Shooter> shooters)
+        public Shooters(ObservableCollection<Shooter> shooters, ObservableCollection<Country> countries)
         {
             InitializeComponent();
 
             _shooters = shooters;
+            _countries = countries;
 
             DGShooters.ItemsSource = _shooters;
         }
@@ -54,16 +56,16 @@ namespace Phase3.Views
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            // AddNewShooter addNewShooter = new AddNewShooter(_shooters);
-            // addNewShooter.ShowDialog();
+            AddNewShooter addNewShooter = new AddNewShooter(_shooters, _countries);
+            addNewShooter.ShowDialog();
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
             Shooter shooter = DGShooters.SelectedItem as Shooter;
             if (shooter != null) {
-                // UpdateShooter updateShooter = new UpdateShooter(_shooters, shooter);
-                // updateShooter.ShowDialog();
+                UpdateShooter updateShooter = new UpdateShooter(_shooters, _countries, shooter);
+                updateShooter.ShowDialog();
             }
         }
 

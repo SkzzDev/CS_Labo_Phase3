@@ -28,6 +28,7 @@ namespace Phase3
         private ObservableCollection<User> _users = new ObservableCollection<User>();
         private ObservableCollection<Competition> _competitions = new ObservableCollection<Competition>();
         private ObservableCollection<Shooter> _shooters = new ObservableCollection<Shooter>();
+        private ObservableCollection<Country> _countries = new ObservableCollection<Country>();
 
         #endregion
 
@@ -45,6 +46,9 @@ namespace Phase3
 
             ShootersModel shootersModel = new ShootersModel();
             _shooters = shootersModel.GetAll<Shooter>();
+
+            CountriesModel countriesModel = new CountriesModel();
+            _countries = countriesModel.GetAll<Country>();
 
             _userConnected = userConnected;
             Fullname.DataContext = _userConnected;
@@ -86,7 +90,7 @@ namespace Phase3
 
         private void LVShooters_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Main.Content = new Views.Shooters(_shooters);
+            Main.Content = new Views.Shooters(_shooters, _countries);
         }
 
         private void LVResutls_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

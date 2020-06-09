@@ -76,6 +76,14 @@ namespace Core.Elements
             Iso3 = iso3;
         }
 
+        public Country(Country country)
+        {
+            Id = country.Id;
+            Name = country.Name;
+            Iso2 = country.Iso2;
+            Iso3 = country.Iso3;
+        }
+
         public Country() { }
 
         #endregion
@@ -134,6 +142,11 @@ namespace Core.Elements
                 return Id.CompareTo(toCompare.Id);
             }
             return -1;
+        }
+
+        public override string ToString()
+        {
+            return "[" + Iso2 + "] " + Name;
         }
 
         #endregion

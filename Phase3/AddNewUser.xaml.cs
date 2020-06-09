@@ -49,16 +49,19 @@ namespace Phase3
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(TBId.Text, out int id)) {
-                User newUser = new User(id, TBFirstname.Text, TBLastname.Text, TBEmail.Text, PBPassword.Password);
+            if (int.TryParse(TBId.Text.Trim(), out int id)) {
+                string firstname = TBFirstname.Text.Trim();
+                string lastname = TBLastname.Text.Trim();
+                string email = TBEmail.Text.Trim();
+                User newUser = new User(id, firstname, lastname, email, PBPassword.Password);
                 if (newUser.IsSavable()) {
-                    if (_usersModel.Exists<User>("Id", id)) {
-                        MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (!Functions.IsEmailValid(TBEmail.Text)) {
-                        MessageBox.Show("This email format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (!Functions.IsPasswordValid(PBPassword.Password)) {
+                    if (!Functions.IsPasswordValid(PBPassword.Password)) {
                         MessageBox.Show("This password format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (_usersModel.Exists<User>("Email", TBEmail.Text)) {
+                    } else if (!Functions.IsEmailValid(email)) {
+                        MessageBox.Show("This email format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else if (_usersModel.Exists<User>("Id", id)) {
+                        MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else if (_usersModel.Exists<User>("Email", email)) {
                         MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
                         try {

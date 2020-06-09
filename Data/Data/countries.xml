@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<ArrayOfCountry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Country>
+    <Id>56</Id>
+    <Name>Belgium</Name>
+    <Iso2>BE</Iso2>
+    <Iso3>BEL</Iso3>
+  </Country>
+  <Country>
+    <Id>250</Id>
+    <Name>France</Name>
+    <Iso2>FR</Iso2>
+    <Iso3>FRA</Iso3>
+  </Country>
+  <Country>
+    <Id>276</Id>
+    <Name>Germany</Name>
+    <Iso2>DE</Iso2>
+    <Iso3>DEU</Iso3>
+  </Country>
+  <Country>
+    <Id>442</Id>
+    <Name>Luxembourg</Name>
+    <Iso2>LU</Iso2>
+    <Iso3>LUX</Iso3>
+  </Country>
+  <Country>
+    <Id>528</Id>
+    <Name>Netherlands</Name>
+    <Iso2>NL</Iso2>
+    <Iso3>NLD</Iso3>
+  </Country>
+  <Country>
+    <Id>826</Id>
+    <Name>United Kingdom</Name>
+    <Iso2>GB</Iso2>
+    <Iso3>GBR</Iso3>
+  </Country>
+</ArrayOfCountry>

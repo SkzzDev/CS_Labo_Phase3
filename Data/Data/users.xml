@@ -19,60 +19,6 @@
     <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
   </User>
   <User>
-    <Email>florent-banneux8@hotmail.com</Email>
-    <Id>8</Id>
-    <Firstname>Florent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
-    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>florent-banneux9@hotmail.com</Email>
-    <Id>9</Id>
-    <Firstname>Florent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
-    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>florent-banneux10@hotmail.com</Email>
-    <Id>10</Id>
-    <Firstname>Florent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
-    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>florent-banneux11@hotmail.com</Email>
-    <Id>11</Id>
-    <Firstname>Florent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
-    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>florent-banneux12@hotmail.com</Email>
-    <Id>12</Id>
-    <Firstname>Florent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
-    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>florent-banneux13@hotmail.com</Email>
-    <Id>13</Id>
-    <Firstname>Florent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-05-09T01:11:24.8611785+02:00</CreatedAt>
-    <UpdatedAt>2020-05-09T01:11:24.8611928+02:00</UpdatedAt>
-  </User>
-  <User>
     <Email>tesqdkjd@gmail.com</Email>
     <Id>2</Id>
     <Firstname>Bonjour</Firstname>
@@ -80,32 +26,5 @@
     <Password>Az0</Password>
     <CreatedAt>2020-05-13T16:49:00.8515122+02:00</CreatedAt>
     <UpdatedAt>2020-05-13T16:49:00.851517+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>dazdqd@dsiqj.com</Email>
-    <Id>3</Id>
-    <Firstname>dazdqd</Firstname>
-    <Lastname>dadqsdq</Lastname>
-    <Password>Az0</Password>
-    <CreatedAt>2020-05-13T16:56:00.7756662+02:00</CreatedAt>
-    <UpdatedAt>2020-05-13T16:56:00.7756706+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>test@gmail.com</Email>
-    <Id>7</Id>
-    <Firstname>Test</Firstname>
-    <Lastname>test</Lastname>
-    <Password>123</Password>
-    <CreatedAt>2020-06-04T23:14:12.3851616+02:00</CreatedAt>
-    <UpdatedAt>2020-06-04T23:14:12.3851662+02:00</UpdatedAt>
-  </User>
-  <User>
-    <Email>fb@gmail.com</Email>
-    <Id>5</Id>
-    <Firstname>Florent</Firstname>
-    <Lastname>Banneux</Lastname>
-    <Password>A1a2a3a4</Password>
-    <CreatedAt>2020-06-06T14:39:29.1566344+02:00</CreatedAt>
-    <UpdatedAt>2020-06-06T14:39:29.1566419+02:00</UpdatedAt>
   </User>
 </ArrayOfUser>

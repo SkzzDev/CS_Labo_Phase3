@@ -34,11 +34,11 @@ namespace Phase3
 
         #region Constructors
 
-        public AddNewCompetition(ObservableCollection<Competition> competition)
+        public AddNewCompetition(ObservableCollection<Competition> competitions)
         {
             InitializeComponent();
 
-            _competitions = competition;
+            _competitions = competitions;
 
             TBId.Text = _competitionsModel.GetNextId(_competitions).ToString();
         }
@@ -49,7 +49,7 @@ namespace Phase3
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(TBId.Text, out int id)) {
+            if (int.TryParse(TBId.Text.Trim(), out int id)) {
                 if (DPStartDate.SelectedDate == null) {
                     MessageBox.Show("You must select a starting date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 } else if (DPStartDate.SelectedDate == null) {
@@ -60,7 +60,8 @@ namespace Phase3
                     if (endDate < startDate) {
                         MessageBox.Show("The ending date can't be before the starting date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
-                        Competition newCompetition = new Competition(id, TBName.Text, startDate, endDate, DateTime.Now, DateTime.Now);
+                        string name = TBName.Text.Trim();
+                        Competition newCompetition = new Competition(id, name, startDate, endDate, DateTime.Now, DateTime.Now);
                         if (newCompetition.IsSavable()) {
                             if (_competitionsModel.Exists<Competition>("Id", id)) {
                                 MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);

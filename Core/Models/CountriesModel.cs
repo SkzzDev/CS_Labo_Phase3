@@ -2,6 +2,7 @@
 using Core.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,16 @@ namespace Core.Models
                 return flagPicture + "\\" + countryId + ".png";
             }
             return flagPicture + "\\_default.png";
+        }
+
+        public Country GetCountryRefInsideList(Country toFind, ObservableCollection<Country> countries)
+        {
+            foreach (Country country in countries) {
+                if (toFind.Equals(country)) {
+                    return country;
+                }
+            }
+            return null;
         }
 
         #endregion
