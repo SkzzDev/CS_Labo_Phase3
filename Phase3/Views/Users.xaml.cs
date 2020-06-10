@@ -25,8 +25,8 @@ namespace Phase3.Views
 
         #region Properties
 
-        private ObservableCollection<User> _users;
-        private UsersModel _usersModel = new UsersModel();
+        private readonly ObservableCollection<User> _users;
+        private readonly UsersModel _usersModel = new UsersModel();
 
         #endregion
 
@@ -64,7 +64,7 @@ namespace Phase3.Views
         {
             User user = DGUsers.SelectedItem as User;
             if (user != null) {
-                UpdateUser updateUser = new UpdateUser(_users, user);
+                UpdateUser updateUser = new UpdateUser(user);
                 updateUser.ShowDialog();
             }
             DGUsers.SelectedIndex = -1;

@@ -25,7 +25,7 @@ namespace Core
 
         #region MemberVars
 
-        private List<Constraint> _constraints = new List<Constraint>() {
+        private readonly List<Constraint> _constraints = new List<Constraint>() {
             new Constraint("users", "Id", ConstraintsTypes.UNIQUE),
             new Constraint("users", "Email", ConstraintsTypes.UNIQUE)
         };

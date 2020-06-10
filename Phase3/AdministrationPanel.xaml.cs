@@ -26,10 +26,10 @@ namespace Phase3
 
         public static User _userConnected = null;
 
-        private ObservableCollection<User> _users = new ObservableCollection<User>();
-        private ObservableCollection<Competition> _competitions = new ObservableCollection<Competition>();
-        private ObservableCollection<Shooter> _shooters = new ObservableCollection<Shooter>();
-        private ObservableCollection<Country> _countries = new ObservableCollection<Country>();
+        private readonly ObservableCollection<User> _users = new ObservableCollection<User>();
+        private readonly ObservableCollection<Competition> _competitions = new ObservableCollection<Competition>();
+        private readonly ObservableCollection<Shooter> _shooters = new ObservableCollection<Shooter>();
+        private readonly ObservableCollection<Country> _countries = new ObservableCollection<Country>();
 
         #endregion
 

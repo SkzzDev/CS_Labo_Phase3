@@ -26,21 +26,17 @@ namespace Phase3
 
         #region Properties
 
-        private ObservableCollection<User> _users = new ObservableCollection<User>();
-
-        private User _userToUpdate;
-
+        private readonly User _userToUpdate;
         private readonly UsersModel _usersModel = new UsersModel();
 
         #endregion
 
         #region Constructors
 
-        public UpdateUser(ObservableCollection<User> users, User userToUpdate)
+        public UpdateUser(User userToUpdate)
         {
             InitializeComponent();
 
-            _users = users;
             _userToUpdate = userToUpdate;
 
             TxBInfo.Text = "(#" + userToUpdate.Id + ") " + userToUpdate.Email;
@@ -79,10 +75,10 @@ namespace Phase3
                             MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                         } else {
                             try {
-                                Registry.MoveUserRegistry(_userToUpdate.Id.ToString(), id.ToString());
                                 Dictionary<string, object> conditions = new Dictionary<string, object>();
                                 conditions.Add("Id", _userToUpdate.Id);
                                 _usersModel.Update<User>(newUser, conditions);
+                                Registry.MoveUserRegistry(_userToUpdate.Id.ToString(), id.ToString());
                                 _userToUpdate.Hydrate(newUser);
                                 MessageBox.Show("The user has been updated.", "User updated !", MessageBoxButton.OK, MessageBoxImage.Information);
                                 Close();

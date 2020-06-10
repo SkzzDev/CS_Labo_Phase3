@@ -36,4 +36,13 @@
     <CreatedAt>2020-06-09T19:27:10.8839334+02:00</CreatedAt>
     <UpdatedAt>2020-06-09T19:27:10.8839668+02:00</UpdatedAt>
   </Shooter>
+  <Shooter>
+    <Id>2020AAAAAA05</Id>
+    <Firstname>Test</Firstname>
+    <Lastname>Test</Lastname>
+    <Birthday>2020-03-04T00:00:00</Birthday>
+    <NationalityCountryId>56</NationalityCountryId>
+    <CreatedAt>2020-06-11T00:49:24.1489685+02:00</CreatedAt>
+    <UpdatedAt>2020-06-11T00:49:24.1489726+02:00</UpdatedAt>
+  </Shooter>
 </ArrayOfShooter>

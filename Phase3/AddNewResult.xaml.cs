@@ -26,7 +26,7 @@ namespace Phase3
 
         #region Properties
 
-        private ObservableCollection<Result> _results = new ObservableCollection<Result>();
+        private readonly ObservableCollection<Result> _results = new ObservableCollection<Result>();
 
         private readonly ShootersModel _shootersModel = new ShootersModel();
         private readonly ResultsModel _resultsModel;
