@@ -60,6 +60,16 @@ namespace Core.Elements
             UpdatedAt = updatedAt;
         }
 
+        public Competition(int id, string name, DateTime startDate, DateTime endDate)
+        {
+            Id = id;
+            Name = name;
+            StartDate = startDate;
+            EndDate = endDate;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+        }
+
         public Competition(Competition competition) : this (competition.Id, competition.Name, competition.StartDate, competition.EndDate, competition.CreatedAt, competition.UpdatedAt) { }
 
         public Competition() { }

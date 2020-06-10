@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ArrayOfResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Result>
+    <Serie1>50</Serie1>
+    <Serie2>50</Serie2>
+    <Serie3>50</Serie3>
+    <Serie4>50</Serie4>
+    <ShootedById>2020AAAAAA03</ShootedById>
+    <CreatedAt>2020-06-10T18:07:53.3635921+02:00</CreatedAt>
+    <UpdatedAt>2020-06-10T18:07:53.3635939+02:00</UpdatedAt>
+  </Result>
+  <Result>
+    <Serie1>60</Serie1>
+    <Serie2>60</Serie2>
+    <Serie3>60</Serie3>
+    <Serie4>60</Serie4>
+    <ShootedById>2020AAAAAA02</ShootedById>
+    <CreatedAt>2020-06-10T19:10:29.8688849+02:00</CreatedAt>
+    <UpdatedAt>2020-06-10T19:10:29.8688876+02:00</UpdatedAt>
+  </Result>
+</ArrayOfResult>

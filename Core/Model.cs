@@ -38,13 +38,13 @@ namespace Core
             XML.Update<T>(DataFile, t, conditions);
         }
 
-        public bool Exists<T>(string field = "Id", object value = null) where T : IXMLSavable
+        public bool Exists<T>(string property = "Id", object value = null) where T : IXMLSavable
         {
-            if (typeof(T).GetProperty(field) == null) {
-                Logs.Write("The parameter « " + field + " » doesn't exist in the class « " + typeof(T).ToString() + " ».");
+            if (typeof(T).GetProperty(property) == null) {
+                Logs.Write("The property « " + property + " » doesn't exist in the class « " + typeof(T).ToString() + " ».");
             } else {
                 Dictionary<string, object> search = new Dictionary<string, object>();
-                search.Add(field, value);
+                search.Add(property, value);
                 try {
                     return XML.Find<T>(DataFile, search).Count() >= 1;
                 } catch (Exception) {

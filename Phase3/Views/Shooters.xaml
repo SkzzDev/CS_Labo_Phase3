@@ -19,21 +19,21 @@
                     <Button x:Name="BtnReload" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnReload_Click">Reload</Button>
                 </Border>
             </Canvas>
-            <DataGrid x:Name="DGShooters" Margin="0 30 0 0" Height="264" IsReadOnly="True" Width="{Binding ElementName=MainStackPanel, Path=ActualWidth}" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
+            <DataGrid x:Name="DGShooters" Margin="0 30 0 0" Height="264" IsReadOnly="True" SelectionMode="Single" Width="{Binding ElementName=MainStackPanel, Path=ActualWidth}" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="Auto" MinWidth="40" Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Width="Auto" MinWidth="40" Header="#" Binding="{Binding Id}" />
                     <DataGridTextColumn Width="2*" Header="Firstname" Binding="{Binding Firstname}" />
                     <DataGridTextColumn Width="2*" Header="Lastname" Binding="{Binding Lastname}" />
                     <DataGridTextColumn Width="80" MinWidth="80" MaxWidth="80" Header="Birthday" Binding="{Binding BirthdayDate}" />
-                    <DataGridTemplateColumn Width="60" MinWidth="60" MaxWidth="60" Header="Nationality" IsReadOnly="True">
+                    <DataGridTemplateColumn Width="80" MinWidth="80" MaxWidth="80" Header="Nationality" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding NationalityCountryId, Converter={StaticResource CountryFlagPictureConverter}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Width="Auto" Header="UpdatedAt" Binding="{Binding UpdatedAt}" />
-                    <DataGridTextColumn Width="Auto" Header="CreatedAt" Binding="{Binding CreatedAt}" />
+                    <DataGridTextColumn Width="Auto" Header="Last update" Binding="{Binding UpdatedAt, StringFormat=\{0:dd/MM/yyyy HH:mm\}}" />
+                    <DataGridTextColumn Width="Auto" Header="Created at" Binding="{Binding CreatedAt, StringFormat=\{0:dd/MM/yyyy HH:mm\}}" />
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0 15 0 0">

@@ -1,4 +1,5 @@
 ﻿using Core.Elements;
+using Core.Helpers;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -60,23 +61,29 @@ namespace Phase3
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(TBId.Text, out int id)) {
-                if (DPStartDate.SelectedDate == null) {
-                    MessageBox.Show("You must select a starting date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                } else if (DPStartDate.SelectedDate == null) {
-                    MessageBox.Show("You must select a ending date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                } else {
+            string idStr = TBId.Text.Trim();
+            string name = TBName.Text.Trim();
+            if (idStr.Equals("") || name.Equals("") || DPStartDate.SelectedDate == null || DPEndDate.SelectedDate == null) {
+                MessageBox.Show("You must fill all the fields.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else {
+                if (int.TryParse(idStr, out int id)) {
                     DateTime startDate = (DateTime)DPStartDate.SelectedDate;
                     DateTime endDate = (DateTime)DPEndDate.SelectedDate;
                     if (endDate < startDate) {
                         MessageBox.Show("The ending date can't be before the starting date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
-                        Competition newCompetition = new Competition(id, TBName.Text, startDate, endDate, _competitionToUpdate.CreatedAt, DateTime.Now);
+                        Competition newCompetition = new Competition(id, name, startDate, endDate, _competitionToUpdate.CreatedAt, DateTime.Now);
                         if (newCompetition.IsSavable()) {
                             if (id != _competitionToUpdate.Id && _competitionsModel.Exists<Competition>("Id", id)) {
                                 MessageBox.Show("The id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                             } else {
                                 try {
+                                    if (id != _competitionToUpdate.Id) {
+                                        // Rename competition's results' file if the id changed
+                                        string oldResultsFilename = Functions.GetDataFilePath("results/" + _competitionToUpdate.Id.ToString());
+                                        string newResultsFilename = Functions.GetDataFilePath("results/" + newCompetition.Id.ToString());
+                                        System.IO.File.Move(oldResultsFilename, newResultsFilename);
+                                    }
                                     Dictionary<string, object> conditions = new Dictionary<string, object>();
                                     conditions.Add("Id", _competitionToUpdate.Id);
                                     _competitionsModel.Update<Competition>(newCompetition, conditions);
@@ -92,9 +99,9 @@ namespace Phase3
                             MessageBox.Show(errors.Values.First(), "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
+                } else {
+                    MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-            } else {
-                MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

@@ -9,9 +9,30 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Styles/Buttons.xaml" />
     </UserControl.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="30">
             <TextBlock FontWeight="Bold" FontSize="30px" TextWrapping="Wrap">The results</TextBlock>
+            <Canvas>
+                <Border Canvas.Right="0" Canvas.Bottom="-15px" Grid.Column="1" CornerRadius="15" VerticalAlignment="Center">
+                    <Button x:Name="BtnReload" Style="{StaticResource BlueBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnReload_Click">Reload</Button>
+                </Border>
+            </Canvas>
+            <DataGrid x:Name="DGCompetitions" Margin="0 30 0 0" Height="150" IsReadOnly="True" SelectionMode="Single" Width="{Binding ElementName=MainStackPanel, Path=ActualWidth}" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="Auto" MinWidth="40" Header="#" Binding="{Binding Id}" />
+                    <DataGridTextColumn Width="3*" Header="Competition name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Width="1*" Header="Starting date" Binding="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                    <DataGridTextColumn Width="1*" Header="Ending date" Binding="{Binding EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                    <DataGridTextColumn Width="Auto" Header="Last update" Binding="{Binding UpdatedAt, StringFormat=\{0:dd/MM/yyyy HH:mm\}}" />
+                    <DataGridTextColumn Width="Auto" Header="Created at" Binding="{Binding CreatedAt, StringFormat=\{0:dd/MM/yyyy HH:mm\}}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0 15 0 0">
+                <Border Grid.Column="1" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
+                    <Button x:Name="BtnView" Style="{StaticResource BlueBtn}" VerticalAlignment="Center" Padding="16 5" FontSize="16" Click="BtnView_Click">View competition's results</Button>
+                </Border>
+                <TextBlock Text=".Please select a competition to view its results and add or update them" Padding="16 8" FontSize="14" TextWrapping="Wrap"/>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

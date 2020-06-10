@@ -47,7 +47,7 @@
     <Compile Include="Elements\Country.cs" />
     <Compile Include="Elements\Interfaces\INotFixedInTime.cs" />
     <Compile Include="Elements\Interfaces\IXMLSavable.cs" />
-    <Compile Include="Elements\Serie.cs" />
+    <Compile Include="Elements\Result.cs" />
     <Compile Include="Elements\Shooter.cs" />
     <Compile Include="Elements\User.cs" />
     <Compile Include="Exceptions\XML.cs" />
@@ -56,7 +56,7 @@
     <Compile Include="Logs.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Models\CompetitionsModel.cs" />
-    <Compile Include="Models\SeriesModel.cs" />
+    <Compile Include="Models\ResultsModel.cs" />
     <Compile Include="Models\CountriesModel.cs" />
     <Compile Include="Models\ShootersModel.cs" />
     <Compile Include="Models\UsersModel.cs" />

@@ -176,6 +176,11 @@ namespace Core.Elements
             return -1;
         }
 
+        public override string ToString()
+        {
+            return Id;
+        }
+
         #endregion
 
     }

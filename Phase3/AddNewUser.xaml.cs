@@ -49,36 +49,42 @@ namespace Phase3
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(TBId.Text.Trim(), out int id)) {
-                string firstname = TBFirstname.Text.Trim();
-                string lastname = TBLastname.Text.Trim();
-                string email = TBEmail.Text.Trim();
-                User newUser = new User(id, firstname, lastname, email, PBPassword.Password);
-                if (newUser.IsSavable()) {
-                    if (!Functions.IsPasswordValid(PBPassword.Password)) {
-                        MessageBox.Show("This password format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (!Functions.IsEmailValid(email)) {
-                        MessageBox.Show("This email format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (_usersModel.Exists<User>("Id", id)) {
-                        MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (_usersModel.Exists<User>("Email", email)) {
-                        MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else {
-                        try {
-                            _usersModel.Add<User>(newUser);
-                            _users.Add(newUser);
-                            MessageBox.Show("The user has been added.", "User added !", MessageBoxButton.OK, MessageBoxImage.Information);
-                            Close();
-                        } catch (Exception ex) {
-                            MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+            string idStr = TBId.Text.Trim();
+            string firstname = TBFirstname.Text.Trim();
+            string lastname = TBLastname.Text.Trim();
+            string email = TBEmail.Text.Trim();
+            string password = PBPassword.Password;
+            if (idStr.Equals("") || firstname.Equals("") || lastname.Equals("") || email.Equals("") || password.Equals("")) {
+                MessageBox.Show("You must fill all the fields.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else {
+                if (int.TryParse(idStr, out int id)) {
+                    User newUser = new User(id, firstname, lastname, email, password);
+                    if (newUser.IsSavable()) {
+                        if (!Functions.IsPasswordValid(password)) {
+                            MessageBox.Show("This password format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        } else if (!Functions.IsEmailValid(email)) {
+                            MessageBox.Show("This email format is invalid.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        } else if (_usersModel.Exists<User>("Id", id)) {
+                            MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        } else if (_usersModel.Exists<User>("Email", email)) {
+                            MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        } else {
+                            try {
+                                _usersModel.Add<User>(newUser);
+                                _users.Add(newUser);
+                                MessageBox.Show("The user has been added.", "User added !", MessageBoxButton.OK, MessageBoxImage.Information);
+                                Close();
+                            } catch (Exception ex) {
+                                MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
                         }
+                    } else {
+                        SortedDictionary<string, string> errors = newUser.GetInvalidFields();
+                        MessageBox.Show(errors.Values.First(), "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 } else {
-                    SortedDictionary<string, string> errors = newUser.GetInvalidFields();
-                    MessageBox.Show(errors.Values.First(), "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-            } else {
-                MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

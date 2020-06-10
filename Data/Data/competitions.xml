@@ -1,27 +1,35 @@
 <?xml version="1.0"?>
 <ArrayOfCompetition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Competition>
-    <Id>1</Id>
-    <Name>Ma nouvelle compétition</Name>
+    <Id>2</Id>
+    <Name>CPLiège</Name>
     <StartDate>2020-06-01T00:00:00</StartDate>
     <EndDate>2020-06-03T00:00:00</EndDate>
     <CreatedAt>2020-06-06T15:00:18.4575312+02:00</CreatedAt>
-    <UpdatedAt>2020-06-06T15:00:18.4575359+02:00</UpdatedAt>
+    <UpdatedAt>2020-06-10T18:44:05.0001404+02:00</UpdatedAt>
   </Competition>
   <Competition>
-    <Id>2</Id>
-    <Name>Belgian Open Air</Name>
+    <Id>1</Id>
+    <Name>Belgian Open</Name>
     <StartDate>2020-11-02T00:00:00</StartDate>
     <EndDate>2020-11-03T00:00:00</EndDate>
     <CreatedAt>2020-06-06T15:01:32.4183452+02:00</CreatedAt>
-    <UpdatedAt>2020-06-06T15:01:32.4183482+02:00</UpdatedAt>
+    <UpdatedAt>2020-06-10T18:44:13.5840226+02:00</UpdatedAt>
   </Competition>
   <Competition>
-    <Id>4</Id>
+    <Id>12</Id>
     <Name>-é"çà'~,ñùàè薄雾浓云愁永昼</Name>
     <StartDate>2020-06-07T00:00:00</StartDate>
     <EndDate>2020-06-09T00:00:00</EndDate>
     <CreatedAt>2020-06-06T17:23:03.5856606+02:00</CreatedAt>
-    <UpdatedAt>2020-06-06T18:33:23.4183803+02:00</UpdatedAt>
+    <UpdatedAt>2020-06-10T18:40:01.8879768+02:00</UpdatedAt>
+  </Competition>
+  <Competition>
+    <Id>8</Id>
+    <Name>Nouveau nom bis</Name>
+    <StartDate>2020-05-26T00:00:00</StartDate>
+    <EndDate>2020-05-28T00:00:00</EndDate>
+    <CreatedAt>2020-06-10T18:21:55.7572927+02:00</CreatedAt>
+    <UpdatedAt>2020-06-10T18:43:40.8575877+02:00</UpdatedAt>
   </Competition>
 </ArrayOfCompetition>

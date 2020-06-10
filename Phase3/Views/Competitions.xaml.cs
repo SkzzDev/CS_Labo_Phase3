@@ -24,7 +24,8 @@ namespace Phase3.Views
 
         #region Properties
 
-        private ObservableCollection<Competition> _competitions = new ObservableCollection<Competition>();
+        private ObservableCollection<Competition> _competitions;
+        private CompetitionsModel _competitionsModel = new CompetitionsModel();
 
         #endregion
 
@@ -45,11 +46,11 @@ namespace Phase3.Views
 
         private void BtnReload_Click(object sender, RoutedEventArgs e)
         {
-            CompetitionsModel competitionsModel = new CompetitionsModel();
+            ObservableCollection<Competition> newCompetitions = _competitionsModel.GetAll<Competition>();
             _competitions.Clear();
-            foreach (Competition competition in competitionsModel.GetAll<Competition>()) {
+            foreach (Competition competition in newCompetitions)
                 _competitions.Add(competition);
-            }
+            DGCompetitions.SelectedIndex = -1;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -65,23 +66,24 @@ namespace Phase3.Views
                 UpdateCompetition updateCompetition = new UpdateCompetition(_competitions, competition);
                 updateCompetition.ShowDialog();
             }
+            DGCompetitions.SelectedIndex = -1;
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             Competition competition = DGCompetitions.SelectedItem as Competition;
             if (competition != null) {
-                CompetitionsModel competitionsModel = new CompetitionsModel();
                 try {
                     Dictionary<string, object> conditions = new Dictionary<string, object>();
                     conditions.Add("Id", competition.Id);
-                    competitionsModel.Delete<Competition>(conditions);
+                    _competitionsModel.Delete<Competition>(conditions);
                     _competitions.Remove(competition);
                     MessageBox.Show("The competition has been deleted.", "Competition deleted !", MessageBoxButton.OK, MessageBoxImage.Information);
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
+            DGCompetitions.SelectedIndex = -1;
         }
 
         #endregion

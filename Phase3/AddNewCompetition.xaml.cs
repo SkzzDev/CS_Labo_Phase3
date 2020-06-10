@@ -49,19 +49,18 @@ namespace Phase3
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(TBId.Text.Trim(), out int id)) {
-                if (DPStartDate.SelectedDate == null) {
-                    MessageBox.Show("You must select a starting date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                } else if (DPStartDate.SelectedDate == null) {
-                    MessageBox.Show("You must select a ending date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                } else {
+            string idStr = TBId.Text.Trim();
+            string name = TBName.Text.Trim();
+            if (idStr.Equals("") || name.Equals("") || DPStartDate.SelectedDate == null || DPEndDate.SelectedDate == null) {
+                MessageBox.Show("You must fill all the fields.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else {
+                if (int.TryParse(idStr, out int id)) {
                     DateTime startDate = (DateTime)DPStartDate.SelectedDate;
                     DateTime endDate = (DateTime)DPEndDate.SelectedDate;
                     if (endDate < startDate) {
                         MessageBox.Show("The ending date can't be before the starting date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
-                        string name = TBName.Text.Trim();
-                        Competition newCompetition = new Competition(id, name, startDate, endDate, DateTime.Now, DateTime.Now);
+                        Competition newCompetition = new Competition(id, name, startDate, endDate);
                         if (newCompetition.IsSavable()) {
                             if (_competitionsModel.Exists<Competition>("Id", id)) {
                                 MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -80,9 +79,9 @@ namespace Phase3
                             MessageBox.Show(errors.Values.First(), "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
+                } else {
+                    MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-            } else {
-                MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

@@ -24,6 +24,9 @@
     <Compile Update="AddNewCompetition.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="AddNewResult.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UpdateCompetition.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="AddNewCompetition.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="AddNewResult.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\Buttons.xaml">

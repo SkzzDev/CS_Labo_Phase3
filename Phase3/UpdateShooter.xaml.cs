@@ -69,19 +69,22 @@ namespace Phase3
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (DPBirthday.SelectedDate == null) {
-                MessageBox.Show("You must select a birthday date.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+            string id = TBId.Text.Trim();
+            string firstname = TBFirstname.Text.Trim();
+            string lastname = TBLastname.Text.Trim();
+            if (id.Equals("") || firstname.Equals("") || lastname.Equals("") || DPBirthday.SelectedDate == null) {
+                MessageBox.Show("You must fill all the fields.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
-                string id = TBId.Text.Trim();
-                string firstname = TBFirstname.Text.Trim();
-                string lastname = TBLastname.Text.Trim();
                 DateTime birthday = (DateTime)DPBirthday.SelectedDate;
-                Shooter newShooter = new Shooter(id, firstname, lastname, birthday, (Country)CBCountries.SelectedItem, DateTime.Now, DateTime.Now);
+                Shooter newShooter = new Shooter(id, firstname, lastname, birthday, (Country)CBCountries.SelectedItem, _shooterToUpdate.CreatedAt, DateTime.Now);
                 if (newShooter.IsSavable()) {
                     if (!id.Equals(_shooterToUpdate.Id) && _shootersModel.Exists<Shooter>("Id", id)) {
                         MessageBox.Show("This id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
                         try {
+                            if (!id.Equals(_shooterToUpdate.Id)) {
+                                _shootersModel.UpdateReferences(_shooterToUpdate.Id, id);
+                            }
                             Dictionary<string, object> conditions = new Dictionary<string, object>();
                             conditions.Add("Id", _shooterToUpdate.Id);
                             _shootersModel.Update<Shooter>(newShooter, conditions);

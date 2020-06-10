@@ -13,3 +13,6 @@
 [6/6/2020 @ 15:44:59] Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
 [6/6/2020 @ 17:2:1] There is an error in XML document (2, 2).
 [6/6/2020 @ 17:3:17] There is an error in XML document (2, 2).
+[10/6/2020 @ 17:23:23] Core.Elements.Result cannot be serialized because it does not have a parameterless constructor.
+[10/6/2020 @ 17:24:4] Could not find file 'C:\Compilations\C#\Labos\Phase3\Data\Data\resutls\2.xml'.
+[10/6/2020 @ 18:2:54] The parameter « ShootedById » doesn't exist in the class « Core.Elements.Shooter ».

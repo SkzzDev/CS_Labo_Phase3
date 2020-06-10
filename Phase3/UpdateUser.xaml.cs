@@ -61,32 +61,40 @@ namespace Phase3
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            int id;
-            if (int.TryParse(TBId.Text, out id)) {
-                User newUser = new User(id, TBFirstname.Text, TBLastname.Text, TBEmail.Text, PBPassword.Password);
-                if (newUser.IsSavable()) {
-                    if (id != _userToUpdate.Id && _usersModel.Exists<User>("Id", id)) {
-                        MessageBox.Show("The id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else if (_usersModel.Exists<User>("Email", TBEmail.Text)) {
-                        MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    } else {
-                        try {
-                            Dictionary<string, object> conditions = new Dictionary<string, object>();
-                            conditions.Add("Id", _userToUpdate.Id);
-                            _usersModel.Update<User>(newUser, conditions);
-                            _userToUpdate.Hydrate(newUser);
-                            MessageBox.Show("The user has been updated.", "User updated !", MessageBoxButton.OK, MessageBoxImage.Information);
-                            Close();
-                        } catch (Exception ex) {
-                            MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+            string idStr = TBId.Text.Trim();
+            string firstname = TBFirstname.Text.Trim();
+            string lastname = TBLastname.Text.Trim();
+            string email = TBEmail.Text.Trim();
+            string password = PBPassword.Password;
+            if (idStr.Equals("") || firstname.Equals("") || lastname.Equals("") || email.Equals("") || password.Trim().Equals("")) {
+                MessageBox.Show("You must fill all the fields.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else {
+                if (int.TryParse(TBId.Text, out int id)) {
+                    User newUser = new User(id, firstname, lastname, email, password, _userToUpdate.CreatedAt, DateTime.Now);
+                    if (newUser.IsSavable()) {
+                        if (id != _userToUpdate.Id && _usersModel.Exists<User>("Id", id)) {
+                            MessageBox.Show("The id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        } else if (_usersModel.Exists<User>("Email", TBEmail.Text)) {
+                            MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        } else {
+                            try {
+                                Dictionary<string, object> conditions = new Dictionary<string, object>();
+                                conditions.Add("Id", _userToUpdate.Id);
+                                _usersModel.Update<User>(newUser, conditions);
+                                _userToUpdate.Hydrate(newUser);
+                                MessageBox.Show("The user has been updated.", "User updated !", MessageBoxButton.OK, MessageBoxImage.Information);
+                                Close();
+                            } catch (Exception ex) {
+                                MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
                         }
+                    } else {
+                        SortedDictionary<string, string> errors = newUser.GetInvalidFields();
+                        MessageBox.Show(errors.Values.First(), "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 } else {
-                    SortedDictionary<string, string> errors = newUser.GetInvalidFields();
-                    MessageBox.Show(errors.Values.First(), "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-            } else {
-                MessageBox.Show("The id must be a positive integer.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

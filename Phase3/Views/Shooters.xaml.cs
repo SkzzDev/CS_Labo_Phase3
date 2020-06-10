@@ -24,8 +24,9 @@ namespace Phase3.Views
 
         #region Properties
 
-        private ObservableCollection<Shooter> _shooters = new ObservableCollection<Shooter>();
-        private ObservableCollection<Country> _countries = new ObservableCollection<Country>();
+        private ObservableCollection<Shooter> _shooters;
+        private ObservableCollection<Country> _countries;
+        private ShootersModel _shootersModel = new ShootersModel();
 
         #endregion
 
@@ -47,11 +48,11 @@ namespace Phase3.Views
 
         private void BtnReload_Click(object sender, RoutedEventArgs e)
         {
-            ShootersModel shootersModel = new ShootersModel();
+            ObservableCollection<Shooter> newShooters = _shootersModel.GetAll<Shooter>();
             _shooters.Clear();
-            foreach (Shooter Shooter in shootersModel.GetAll<Shooter>()) {
-                _shooters.Add(Shooter);
-            }
+            foreach (Shooter shooter in newShooters)
+                _shooters.Add(shooter);
+            DGShooters.SelectedIndex = -1;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -67,23 +68,24 @@ namespace Phase3.Views
                 UpdateShooter updateShooter = new UpdateShooter(_shooters, _countries, shooter);
                 updateShooter.ShowDialog();
             }
+            DGShooters.SelectedIndex = -1;
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             Shooter shooter = DGShooters.SelectedItem as Shooter;
             if (shooter != null) {
-                ShootersModel shootersModel = new ShootersModel();
                 try {
                     Dictionary<string, object> conditions = new Dictionary<string, object>();
                     conditions.Add("Id", shooter.Id);
-                    shootersModel.Delete<Shooter>(conditions);
+                    _shootersModel.Delete<Shooter>(conditions);
                     _shooters.Remove(shooter);
                     MessageBox.Show("The shooter has been deleted.", "Shooter deleted !", MessageBoxButton.OK, MessageBoxImage.Information);
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
+            DGShooters.SelectedIndex = -1;
         }
 
         #endregion

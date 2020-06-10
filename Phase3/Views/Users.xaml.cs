@@ -24,7 +24,8 @@ namespace Phase3.Views
 
         #region Properties
 
-        private ObservableCollection<User> _users = new ObservableCollection<User>();
+        private ObservableCollection<User> _users;
+        private UsersModel _usersModel = new UsersModel();
 
         #endregion
 
@@ -45,11 +46,11 @@ namespace Phase3.Views
 
         private void BtnReload_Click(object sender, RoutedEventArgs e)
         {
-            UsersModel usersModel = new UsersModel();
+            ObservableCollection<User> newUsers = _usersModel.GetAll<User>();
             _users.Clear();
-            foreach (User user in usersModel.GetAll<User>()) {
+            foreach (User user in newUsers)
                 _users.Add(user);
-            }
+            DGUsers.SelectedIndex = -1;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -65,23 +66,24 @@ namespace Phase3.Views
                 UpdateUser updateUser = new UpdateUser(_users, user);
                 updateUser.ShowDialog();
             }
+            DGUsers.SelectedIndex = -1;
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             User user = DGUsers.SelectedItem as User;
             if (user != null) {
-                UsersModel usersModel = new UsersModel();
                 try {
                     Dictionary<string, object> conditions = new Dictionary<string, object>();
                     conditions.Add("Id", user.Id);
-                    usersModel.Delete<User>(conditions);
+                    _usersModel.Delete<User>(conditions);
                     _users.Remove(user);
                     MessageBox.Show("The user has been deleted.", "User deleted !", MessageBoxButton.OK, MessageBoxImage.Information);
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
+            DGUsers.SelectedIndex = -1;
         }
 
         #endregion

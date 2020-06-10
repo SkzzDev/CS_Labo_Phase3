@@ -95,7 +95,7 @@ namespace Phase3
 
         private void LVResutls_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Main.Content = new Views.Results();
+            Main.Content = new Views.Results(_competitions);
         }
 
         #endregion
