@@ -24,7 +24,7 @@ namespace Phase3
 
         public MainWindow()
         {
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
 
             // Rewrite the constraints file to be sure that they are up to date
@@ -32,21 +32,6 @@ namespace Phase3
 
             TBEmail.Text = "admin@shootingranking.com";
             PBPassword.Password = "Az0";
-
-            //UsersModel usersModel = new UsersModel();
-            try {
-                //List<User> users = new List<User>();
-                //users.Add(new User(1, "Florent", "Banneux", "admin@shootingranking.com", "Az0"));
-                //users.Add(new User(2, "Temp", "Temp", "gemp@gmail.com", "Az0"));
-                //usersModel.RemakeUsersFile(users);
-
-                //List<Shooter> shooters = new List<Shooter>();
-                //Country belgium = new Country(4, "Belgium", "BE", "BEL"); // countriesModel.GetCountry("BEL");
-                //shooters.Add(new Shooter("2004FB01", "Florent", "Banneux", new DateTime(2000, 8, 14), belgium));
-
-            } catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

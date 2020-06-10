@@ -80,8 +80,8 @@ namespace Phase3
                                 try {
                                     if (id != _competitionToUpdate.Id) {
                                         // Rename competition's results' file if the id changed
-                                        string oldResultsFilename = Functions.GetDataFilePath("results/" + _competitionToUpdate.Id.ToString());
-                                        string newResultsFilename = Functions.GetDataFilePath("results/" + newCompetition.Id.ToString());
+                                        string oldResultsFilename = Functions.GetXmlFilePath("results/" + _competitionToUpdate.Id.ToString());
+                                        string newResultsFilename = Functions.GetXmlFilePath("results/" + newCompetition.Id.ToString());
                                         System.IO.File.Move(oldResultsFilename, newResultsFilename);
                                     }
                                     Dictionary<string, object> conditions = new Dictionary<string, object>();

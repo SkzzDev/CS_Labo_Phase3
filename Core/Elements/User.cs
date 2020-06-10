@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Collections.Specialized;
+using System.Xml.Serialization;
 
 namespace Core.Elements
 {
@@ -51,6 +52,12 @@ namespace Core.Elements
                 if (value.Length > 0)
                     _lastname = value;
             }
+        }
+
+        [XmlIgnore]
+        public string FullnameShort
+        {
+            get { return Firstname + " " + Lastname[0] + "."; }
         }
 
         public string Email

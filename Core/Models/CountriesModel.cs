@@ -25,7 +25,7 @@ namespace Core.Models
         #region Constructors
         public CountriesModel()
         {
-            DataFile = Functions.GetDataFilePath("countries");
+            DataFile = Functions.GetXmlFilePath("countries");
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace Core.Models
 
         public string GetFlagPicture(int countryId)
         {
-            string flagPicture = Functions.GetSolutionDirPath() + "\\Data\\FlagsPictures";
+            string flagPicture = Functions.GetAssetsPath() + "\\FlagsPictures";
             if (File.Exists(flagPicture + "\\" + countryId + ".png")) {
                 return flagPicture + "\\" + countryId + ".png";
             }

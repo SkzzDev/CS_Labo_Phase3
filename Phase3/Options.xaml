@@ -1,0 +1,29 @@
+﻿<Window x:Class="Phase3.Options"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Phase3"
+        mc:Ignorable="d"
+        Title="SRA - Options" Height="265" Width="390">
+    <Window.Resources>
+        <ResourceDictionary Source="Styles/Buttons.xaml" />
+    </Window.Resources>
+    <DockPanel>
+        <Border DockPanel.Dock="Top" CornerRadius="3" BorderThickness="0 1 0 1" BorderBrush="#103351" HorizontalAlignment="Stretch">
+            <TextBlock Grid.Column="0" Padding="20" Text="Options" Background="#0761B6" Foreground="White" TextWrapping="NoWrap" FontSize="22px" FontWeight="Bold" VerticalAlignment="Center" />
+        </Border>
+        <StackPanel Margin="20">
+            <Label Content="Xmls path :" FontWeight="Bold" />
+            <TextBox x:Name="TBXmlsPath" Padding="4" />
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0 20 0 0">
+                <Border Grid.Column="2" CornerRadius="15" VerticalAlignment="Center" Margin="0 0 10 0">
+                    <Button x:Name="BtnValidate" Style="{StaticResource GreenBtn}" VerticalAlignment="Center" Padding="16 4" FontSize="14" Click="BtnValidate_Click">Confirm</Button>
+                </Border>
+                <Border Grid.Column="3" CornerRadius="15" VerticalAlignment="Center">
+                    <Button x:Name="BtnDelete" Style="{StaticResource RedBtn}" VerticalAlignment="Center" Padding="16 4" FontSize="14" Click="BtnCancel_Click">Cancel</Button>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

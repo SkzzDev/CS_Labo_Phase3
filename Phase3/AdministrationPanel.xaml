@@ -9,16 +9,15 @@
         Title="SRA - Panel
         " Height="532" Width="1012" MinHeight="360" MinWidth="600">
     <Window.Resources>
-        <converters:LastnameConverter x:Key="LastnameConverter" />
         <converters:ProfilePictureConverter x:Key="ProfilePictureConverter" />
         <ResourceDictionary x:Key="StylesButtons" Source="Styles/Buttons.xaml" />
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Nothing">
-                <MenuItem Header="_Nothing" />
+            <MenuItem Header="_Application">
+                <MenuItem Header="_Options" Click="MI_Application_Options" />
                 <Separator />
-                <MenuItem Header="_Close" Click="MI_Nothing_Close" />
+                <MenuItem Header="_Close" Click="MI_Application_Close" />
             </MenuItem>
         </Menu>
         <Border DockPanel.Dock="Top" BorderThickness="0 1 0 1" BorderBrush="#103351" HorizontalAlignment="Stretch">
@@ -34,11 +33,7 @@
                     <Button x:Name="BtnLogout" VerticalAlignment="Center" Padding="6 4" Click="BtnLogout_Click">Logout</Button>
                 </Border>
                 <StackPanel x:Name="Fullname" Grid.Column="2" Orientation="Horizontal" Margin="0 0 10 0">
-                    <TextBlock Foreground="White" TextWrapping="NoWrap" FontSize="18px" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Firstname}" />
-                        <TextBlock> </TextBlock>
-                        <TextBlock Text="{Binding Lastname, Converter={StaticResource LastnameConverter}}" />
-                    </TextBlock>
+                    <TextBlock Foreground="White" Text="{Binding FullnameShort}" TextWrapping="NoWrap" FontSize="18px" VerticalAlignment="Center" />
                 </StackPanel>
                 <Image Grid.Column="3" Margin="0 0 20 0" Name="ImgProfilePicture" Source="{Binding Id, Converter={StaticResource ProfilePictureConverter}}" Height="50" Width="50" />
             </Grid>

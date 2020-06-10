@@ -15,7 +15,7 @@ namespace Core.Models
         public ResultsModel(int competitionId)
         {
             if (competitionId > 0) {
-                DataFile = Functions.GetDataFilePath("results/" + competitionId.ToString());
+                DataFile = Functions.GetXmlFilePath("results/" + competitionId.ToString());
                 CreateIfDontExist();
             }
         }

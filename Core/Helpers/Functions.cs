@@ -30,9 +30,19 @@ namespace Core.Helpers
             return dir;
         }
 
-        public static string GetDataFilePath(string filename, string ext = "xml")
+        public static string GetInitialXmlsPath()
         {
-            return GetSolutionDirPath() + "\\Data\\Data\\" + filename + "." + ext;
+            return GetSolutionDirPath() + "\\Data\\Xmls";
+        }
+
+        public static string GetAssetsPath()
+        {
+            return GetSolutionDirPath() + "\\Assets";
+        }
+
+        public static string GetXmlFilePath(string filename, string ext = "xml")
+        {
+            return Registry.GetXmlsPath() + "\\" + filename + "." + ext;
         }
 
         public static string GetConstaintsFilePath()
@@ -71,32 +81,6 @@ namespace Core.Helpers
         {
             Regex r = new Regex("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
             return r.IsMatch(password);
-        }
-
-        // Not tested yet
-        public static List<T> ExtractionSort<T>(List<T> tElements, string onProperty = "Id")
-        {
-            if (HasProperty(typeof(T), onProperty)) {
-                PropertyInfo property = typeof(T).GetProperty(onProperty);
-                if (property.PropertyType is IComparable comparableProperty) {
-                    int iMax = 0;
-                    for (int len = tElements.Count(); len > 1; len--) {
-                        for (int i = 1; i < len; i++) {
-                            property.GetValue(tElements[i]);
-                            if (((IComparable)property.GetValue(tElements[i])).CompareTo((IComparable)property.GetValue(tElements[i])) > 0) iMax = i;
-                        }
-                        T temp = tElements[len - 1];
-                        tElements[len - 1] = tElements[iMax];
-                        tElements[iMax] = temp;
-                    }
-                }
-            }
-            return tElements;
-        }
-
-        public static bool HasProperty(this Type obj, string propertyName)
-        {
-            return obj.GetProperty(propertyName) != null;
         }
 
         public static void Sort<T>(this ObservableCollection<T> collection) where T : IComparable

@@ -22,7 +22,7 @@ namespace Core.Models
 
         public CompetitionsModel()
         {
-            DataFile = Functions.GetDataFilePath("competitions");
+            DataFile = Functions.GetXmlFilePath("competitions");
             if (!File.Exists(DataFile)) {
                 try {
                     XML.Create<Competition>(DataFile, new List<Competition>());

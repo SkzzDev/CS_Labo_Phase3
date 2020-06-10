@@ -1,4 +1,5 @@
-﻿using Core.Elements;
+﻿using Core;
+using Core.Elements;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Phase3
 
         #region Properties
 
-        private readonly User _userConnected = null;
+        public static User _userConnected = null;
 
         private ObservableCollection<User> _users = new ObservableCollection<User>();
         private ObservableCollection<Competition> _competitions = new ObservableCollection<Competition>();
@@ -38,6 +39,9 @@ namespace Phase3
         {
             InitializeComponent();
 
+            _userConnected = userConnected;
+            Registry.USER_ID = userConnected.Id.ToString();
+
             UsersModel usersModel = new UsersModel();
             _users = usersModel.GetAll<User>();
 
@@ -50,7 +54,6 @@ namespace Phase3
             CountriesModel countriesModel = new CountriesModel();
             _countries = countriesModel.GetAll<Country>();
 
-            _userConnected = userConnected;
             Fullname.DataContext = _userConnected;
             ImgProfilePicture.DataContext = _userConnected;
 
@@ -61,9 +64,15 @@ namespace Phase3
 
         #region Events
 
-        private void MI_Nothing_Close(object sender, RoutedEventArgs e)
+        private void MI_Application_Close(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void MI_Application_Options(object sender, RoutedEventArgs e)
+        {
+            Options options = new Options();
+            options.Show();
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
@@ -103,6 +112,7 @@ namespace Phase3
         #region Functions
 
         #endregion
+
     }
 
 }

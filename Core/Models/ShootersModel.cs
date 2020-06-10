@@ -16,7 +16,7 @@ namespace Core.Models
 
         public ShootersModel()
         {
-            DataFile = Functions.GetDataFilePath("shooters");
+            DataFile = Functions.GetXmlFilePath("shooters");
             if (!File.Exists(DataFile)) {
                 try {
                     XML.Create<Shooter>(DataFile, new List<Shooter>());
@@ -34,7 +34,7 @@ namespace Core.Models
         public void UpdateReferences(string oldId, string newId)
         {
             // Get all competitions's results file
-            string resultsDir = Functions.GetSolutionDirPath() + "\\Data\\Data\\results";
+            string resultsDir = Registry.GetXmlsPath() + "\\results";
             DirectoryInfo d = new DirectoryInfo(resultsDir);
             FileInfo[] Files = d.GetFiles("*.xml");
 

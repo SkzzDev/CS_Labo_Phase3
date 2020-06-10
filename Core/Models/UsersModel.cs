@@ -17,18 +17,11 @@ namespace Core.Models
 
         public UsersModel()
         {
-            DataFile = Functions.GetDataFilePath("users");
+            // Users cannot be stored in the data dir path from the registry beacause we need to
+            // use them before the user is connected to check wether or not the account exists
+            DataFile = Functions.GetInitialXmlsPath() + "\\users.xml";
             if (!File.Exists(DataFile))
                 XML.Create<User>(DataFile, new List<User>());
-        }
-
-        public void RemakeUsersFile(ObservableCollection<User> users)
-        {
-            try {
-                XML.Create<User>(DataFile, new List<User>(users));
-            } catch (Exception) {
-                throw;
-            }
         }
 
         public User GetUser(string field = "Id", object value = null)
@@ -90,7 +83,7 @@ namespace Core.Models
 
         public string GetUserProfilePicture(int userId)
         {
-            string profilePictures = Functions.GetSolutionDirPath() + "\\Data\\ProfilePictures";
+            string profilePictures = Functions.GetAssetsPath() + "\\ProfilePictures";
             if (File.Exists(profilePictures + "\\" + userId + ".png")) {
                 return profilePictures + "\\" + userId + ".png";
             }
