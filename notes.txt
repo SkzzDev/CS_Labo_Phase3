@@ -1,21 +1,3 @@
 To do:
 
-	Faire attention aux Logs, vérifier qu'on les écrit bien tous?
-
 	Mise à jour automatique des listes (voir messages Wadi)
-
-
-
-Questions:
-
-	Type type = typeof(User); // Comment créer une variable/liste du type de la variable "type" ?
-
-	Comment faire en sorte lorsqu'on utilise des stackPanel pour que la fenêtre soit parfaitement dimensionnée à la fin de celui-ci? Utiliser autre chose que stackpanel?
-
-	Un moyen d'ajouter un élément à la fin d'une liste xml sans devoir toute la lire et la réécrire? Une autre façon d'enregistrer plusieurs données du même type (ex: les utilisateurs) ?
-
-	Users.xaml.cs (View) => BtnReload_Click, demander pour l'exception qui se lance lors de l'ajout d'un utilisateur directement dans le fichier (un élément s'ajoute à la liste lors du reload)
-	=> Cette exception ne se lance pas lors d'un delete en revanche par exemple.
-
-	ScrollViewer => pourquoi quand je réduis la fenêtre de hauteur jusqu'à avoir la scrollbar, le margin 30 du haut sur le StackPanel ne fait plus effet?
-

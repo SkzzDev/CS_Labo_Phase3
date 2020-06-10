@@ -16,3 +16,9 @@
 [10/6/2020 @ 17:23:23] Core.Elements.Result cannot be serialized because it does not have a parameterless constructor.
 [10/6/2020 @ 17:24:4] Could not find file 'C:\Compilations\C#\Labos\Phase3\Data\Data\resutls\2.xml'.
 [10/6/2020 @ 18:2:54] The parameter « ShootedById » doesn't exist in the class « Core.Elements.Shooter ».
+[10/6/2020 @ 23:57:27] Could not find file 'C:\Compilations\C#\Labos\Phase3\Data\countries.xml'.
+[11/6/2020 @ 0:19:53] Access to the path 'C:\competitions.xml' is denied.
+[11/6/2020 @ 0:19:53] Could not find file 'C:\competitions.xml'.
+[11/6/2020 @ 0:19:53] Access to the path 'C:\shooters.xml' is denied.
+[11/6/2020 @ 0:19:53] Could not find file 'C:\shooters.xml'.
+[11/6/2020 @ 0:19:53] Could not find file 'C:\countries.xml'.

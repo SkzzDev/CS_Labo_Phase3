@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <ArrayOfCompetition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Competition>
-    <Id>2</Id>
+    <Id>3</Id>
     <Name>CPLiège</Name>
     <StartDate>2020-06-01T00:00:00</StartDate>
     <EndDate>2020-06-03T00:00:00</EndDate>
     <CreatedAt>2020-06-06T15:00:18.4575312+02:00</CreatedAt>
-    <UpdatedAt>2020-06-10T18:44:05.0001404+02:00</UpdatedAt>
+    <UpdatedAt>2020-06-11T00:14:33.6030962+02:00</UpdatedAt>
   </Competition>
   <Competition>
     <Id>1</Id>

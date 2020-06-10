@@ -1,4 +1,5 @@
-﻿using Core.Elements;
+﻿using Core;
+using Core.Elements;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -73,14 +74,19 @@ namespace Phase3.Views
         {
             User user = DGUsers.SelectedItem as User;
             if (user != null) {
-                try {
-                    Dictionary<string, object> conditions = new Dictionary<string, object>();
-                    conditions.Add("Id", user.Id);
-                    _usersModel.Delete<User>(conditions);
-                    _users.Remove(user);
-                    MessageBox.Show("The user has been deleted.", "User deleted !", MessageBoxButton.OK, MessageBoxImage.Information);
-                } catch (Exception ex) {
-                    MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (user.Id.ToString().Equals(Registry.USER_ID)) {
+                    MessageBox.Show("You cannot delete your own account.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else {
+                    try {
+                        Dictionary<string, object> conditions = new Dictionary<string, object>();
+                        conditions.Add("Id", user.Id);
+                        _usersModel.Delete<User>(conditions);
+                        Registry.DeleteUserRegistry(user.Id.ToString());
+                        _users.Remove(user);
+                        MessageBox.Show("The user has been deleted.", "User deleted !", MessageBoxButton.OK, MessageBoxImage.Information);
+                    } catch (Exception ex) {
+                        MessageBox.Show(ex.Message, "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
             }
             DGUsers.SelectedIndex = -1;

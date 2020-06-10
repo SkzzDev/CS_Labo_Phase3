@@ -1,4 +1,5 @@
-﻿using Core.Elements;
+﻿using Core;
+using Core.Elements;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -74,10 +75,11 @@ namespace Phase3
                     if (newUser.IsSavable()) {
                         if (id != _userToUpdate.Id && _usersModel.Exists<User>("Id", id)) {
                             MessageBox.Show("The id is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        } else if (_usersModel.Exists<User>("Email", TBEmail.Text)) {
+                        } else if (!email.Equals(_userToUpdate.Email) && _usersModel.Exists<User>("Email", TBEmail.Text)) {
                             MessageBox.Show("This email is already taken.", "Attention !", MessageBoxButton.OK, MessageBoxImage.Warning);
                         } else {
                             try {
+                                Registry.MoveUserRegistry(_userToUpdate.Id.ToString(), id.ToString());
                                 Dictionary<string, object> conditions = new Dictionary<string, object>();
                                 conditions.Add("Id", _userToUpdate.Id);
                                 _usersModel.Update<User>(newUser, conditions);

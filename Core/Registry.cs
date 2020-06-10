@@ -14,15 +14,17 @@ namespace Core
 
         public static string USER_ID = "";
 
-        public static RegistryKey GetUserRegistry()
+        public static RegistryKey GetUserRegistry(string userId = null)
         {
-            if (!USER_ID.Equals("")) {
+            if (userId == null)
+                userId = USER_ID; // Default = connected user
+            if (!userId.Equals("")) {
                 RegistryKey SRA = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("SRA", true);
-                RegistryKey userRegistry = SRA.OpenSubKey(USER_ID, true);
+                RegistryKey userRegistry = SRA.OpenSubKey(userId, true);
 
                 // Create user's registry if it doesn't exist
                 if (userRegistry == null) {
-                    userRegistry = SRA.CreateSubKey(USER_ID, true);
+                    userRegistry = SRA.CreateSubKey(userId, true);
 
                     // Create the keys we need the user to have
                     userRegistry.SetValue("XmlsPath", Functions.GetInitialXmlsPath());
@@ -30,22 +32,48 @@ namespace Core
 
                 return userRegistry;
             } else {
-                Console.WriteLine("No user connected. Cannot use registry functionalities.");
+                Console.WriteLine("The parameter « userId » cannot be empty.");
                 return null;
             }
         }
 
-        public static string GetXmlsPath()
+        public static void MoveUserRegistry(string oldUserId, string newUserId)
         {
-            RegistryKey userRegistry = GetUserRegistry();
+            RegistryKey SRA = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("SRA", true);
+
+            // Create new user registry
+            RegistryKey newUserRegistry = SRA.CreateSubKey(newUserId, true);
+
+            // Assign old registry values
+            newUserRegistry.SetValue("XmlsPath", GetXmlsPath(oldUserId));
+
+            SRA.DeleteSubKeyTree(oldUserId);
+        }
+
+        public static void DeleteUserRegistry(string userId)
+        {
+            RegistryKey userRegistry = GetUserRegistry(userId);
+            if (userRegistry != null) {
+                RegistryKey SRA = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("SRA", true);
+                SRA.DeleteSubKeyTree(userId);
+            }
+        }
+
+        public static string GetXmlsPath(string userId = null)
+        {
+            if (userId == null)
+                userId = USER_ID; // Default = connected user
+            RegistryKey userRegistry = GetUserRegistry(userId);
             if (userRegistry != null)
                 return (string)userRegistry.GetValue("XmlsPath");
             return "";
         }
 
-        public static void SetXmlsPath(string newPath)
+        public static void SetXmlsPath(string newPath, string userId = null)
         {
-            RegistryKey userRegistry = GetUserRegistry();
+            if (userId == null)
+                userId = USER_ID; // Default = connected user
+            RegistryKey userRegistry = GetUserRegistry(userId);
             if (userRegistry != null)
                 userRegistry.SetValue("XmlsPath", newPath);
         }
